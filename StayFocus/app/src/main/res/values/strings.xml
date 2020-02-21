@@ -38,4 +38,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tmp_set_focus">Focus</string>
+    <string name="ui_button_cancel">Cancel</string>
+    <string name="ui_button_start">Start</string>
+    <string name="ui_button_interrupt">Interrupt</string>
+    <string name="ui_button_terminate">Terminate</string>
 </resources>

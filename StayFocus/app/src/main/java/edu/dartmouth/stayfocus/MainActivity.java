@@ -106,4 +106,9 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    public void OnSetFocusClicked(View view) {
+        Intent intent = new Intent(this, SetFocusActivity.class);
+        startActivity(intent);
+    }
 }
