@@ -13,4 +13,7 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="title_activity_todo">TodoActivity</string>
+
+    <string name="empty_not_saved">Todo List not saved because it is empty.</string>
 </resources>
