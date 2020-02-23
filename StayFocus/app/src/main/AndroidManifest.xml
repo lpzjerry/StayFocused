@@ -11,14 +11,14 @@
         android:theme="@style/AppTheme">
         <service
             android:name=".Focus.TimerService"
-            android:enabled="false"
-            android:exported="false"></service>
+            android:enabled="true"
+            android:exported="true"></service>
 
         <activity
-            android:name=".FocusingActivity"
+            android:name=".Focus.FocusingActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".SetTimerActivity"
+            android:name=".Focus.SetTimerActivity"
             android:launchMode="singleTask" />
         <activity android:name=".test_list1" />
         <activity android:name=".SignUpActivity" />
