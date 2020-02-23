@@ -107,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public void OnSetFocusClicked(View view) {
-        Intent intent = new Intent(this, SetFocusActivity.class);
+    public void OnSetTimerClicked(View view) {
+        Intent intent = new Intent(this, SetTimerActivity.class);
         startActivity(intent);
     }
 }

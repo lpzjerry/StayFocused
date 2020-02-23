@@ -9,15 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".test_list1"></activity>
+        <activity
+            android:name=".FocusingActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".SetTimerActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".test_list1" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LogInActivity" />
-        <activity
-            android:name=".CountdownTimerActivity"
-            android:launchMode="singleTask"></activity>
-        <activity
-            android:name=".SetFocusActivity"
-            android:launchMode="singleTask" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
