@@ -1,4 +1,4 @@
-package edu.dartmouth.stayfocus;
+package edu.dartmouth.stayfocus.Focus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,31 +7,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import edu.dartmouth.stayfocus.ui.setfocus.SetFocusFragment;
+import edu.dartmouth.stayfocus.R;
 
-public class SetFocusActivity extends AppCompatActivity {
+public class SetTimerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.set_focus_activity);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, SetFocusFragment.newInstance())
-                    .commitNow();
-        }
+        setContentView(R.layout.activity_set_timer);
     }
 
     public void onClickSetFocusStart(View view) {
-        Intent intent = new Intent(this, CountdownTimerActivity.class);
+        Intent intent = new Intent(this, FocusingActivity.class);
         Bundle bundle = new Bundle();
         int hour = 0, minute = 0, second = 0;
+
         EditText hourText = (EditText) findViewById(R.id.et_hour);
-        hour = Integer.parseInt(hourText.getText().toString());
+        String hourStr = hourText.getText().toString();
+        if (!hourStr.isEmpty())
+            hour = Integer.parseInt(hourStr);
+        // Minute
         EditText minuteText = (EditText) findViewById(R.id.et_minute);
-        minute = Integer.parseInt(minuteText.getText().toString());
+        String minuteStr = minuteText.getText().toString();
+        if (!minuteStr.isEmpty())
+            minute = Integer.parseInt(minuteStr);
+        // Second
         EditText secondText = (EditText) findViewById(R.id.et_second);
-        second = Integer.parseInt(secondText.getText().toString());
+        String secondStr = secondText.getText().toString();
+        if (!secondStr.isEmpty())
+            second = Integer.parseInt(secondStr);
         bundle.putInt("hour", hour);
         bundle.putInt("minute", minute);
         bundle.putInt("second", second);
