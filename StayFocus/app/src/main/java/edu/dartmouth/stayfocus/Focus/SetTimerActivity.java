@@ -1,4 +1,4 @@
-package edu.dartmouth.stayfocus;
+package edu.dartmouth.stayfocus.Focus;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import edu.dartmouth.stayfocus.R;
 
 public class SetTimerActivity extends AppCompatActivity {
 

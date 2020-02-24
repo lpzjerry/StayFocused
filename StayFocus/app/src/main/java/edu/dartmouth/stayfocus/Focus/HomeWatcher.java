@@ -1,4 +1,4 @@
-package edu.dartmouth.stayfocus;
+package edu.dartmouth.stayfocus.Focus;
 
 /* Ref: https://stackoverflow.com/questions/8881951/detect-home-button-press-in-android */
 
