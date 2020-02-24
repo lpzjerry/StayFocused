@@ -9,22 +9,22 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {TodoList.class}, version =  1, exportSchema = false)
-public abstract class TodoListRoomDatabase extends RoomDatabase {
+@Database(entities = {Todo.class}, version =  1, exportSchema = false)
+public abstract class TodoRoomDatabase extends RoomDatabase {
 
-    public abstract TodoListDao todoListDao();
+    public abstract TodoDao todoDao();
 
-    private static volatile TodoListRoomDatabase INSTANCE;
+    private static volatile TodoRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
    public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    public static TodoListRoomDatabase getDatabase(final Context context){
+    public static TodoRoomDatabase getDatabase(final Context context){
         if(INSTANCE == null){
-            synchronized (TodoListRoomDatabase.class){
+            synchronized (TodoRoomDatabase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TodoListRoomDatabase.class, "todolist_database")
+                            TodoRoomDatabase.class, "todolist_database")
                             .build();
                 }
             }

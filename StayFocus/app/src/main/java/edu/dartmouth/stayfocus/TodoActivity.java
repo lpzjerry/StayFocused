@@ -22,9 +22,8 @@ import edu.dartmouth.stayfocus.DialogFragment.TimePickerFragment;
 
 public class TodoActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
+    public static final String EXTRA_REPLY = "com.example.android.todolistsql.REPLY";
 
-    private  EditText mEditWordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

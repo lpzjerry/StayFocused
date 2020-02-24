@@ -7,15 +7,15 @@ import androidx.room.PrimaryKey;
 
 import java.util.Calendar;
 
-@Entity(tableName = "todoList_table")
-public class TodoList {
+@Entity(tableName = "todo_table")
+public class Todo {
 
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "title")
     private String mTitle;
 
-    public TodoList(@NonNull String title){this.mTitle = title;}
+    public Todo(@NonNull String title){this.mTitle = title;}
 
     public String getTitle(){return this.mTitle;}
 }

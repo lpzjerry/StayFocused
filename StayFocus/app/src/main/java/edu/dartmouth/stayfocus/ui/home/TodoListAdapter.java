@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import edu.dartmouth.stayfocus.R;
-import edu.dartmouth.stayfocus.room.TodoList;
+import edu.dartmouth.stayfocus.room.Todo;
 
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoListViewHolder> {
+
     class TodoListViewHolder extends RecyclerView.ViewHolder{
         private final TextView todoItemView;
 
@@ -26,7 +27,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
 
     private final LayoutInflater mInflater;
 
-    private List<TodoList> mTodoLists; //Cached a copy of todoList
+    private List<Todo> mTodoList; //Cached a copy of todoList
 
     TodoListAdapter(Context context){ mInflater = LayoutInflater.from(context); }
 
@@ -38,16 +39,16 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
 
     @Override
     public void onBindViewHolder(TodoListViewHolder holder, int position){
-        if(mTodoLists != null){
-            TodoList current = mTodoLists.get(position);
+        if(mTodoList != null){
+            Todo current = mTodoList.get(position);
             holder.todoItemView.setText(current.getTitle());
         }else{
             holder.todoItemView.setText("No TodoItem");
         }
     }
 
-    void setTodoLists(List<TodoList> todoLists){
-        mTodoLists = todoLists;
+    void setTodoLists(List<Todo> todos){
+        mTodoList = todos;
         notifyDataSetChanged();
     }
 
@@ -55,9 +56,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
     // mTodoList has not been updated (means initially, it's null, and we can't return null).
     @Override
     public int getItemCount() {
-        if (mTodoLists != null) {
-            Log.d("debugItemCount", "" + mTodoLists.size());
-            return mTodoLists.size();
+        if (mTodoList != null) {
+            return mTodoList.size();
         }
         else return 0;
     }
