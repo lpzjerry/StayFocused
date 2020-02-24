@@ -1,7 +1,12 @@
 package edu.dartmouth.stayfocus.Focus;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.KeyguardManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +17,10 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
+import java.util.List;
 
 import com.dhims.timerview.TimerTextView;
 
@@ -27,6 +35,7 @@ public class FocusingActivity extends AppCompatActivity {
     private int hour = 0, minute = 0, second = 0;
     private long futureTimestamp;
     private long remainTimestamp;
+    public HomeWatcher mHomeWatcher;
 
     ServiceConnection timerServiceConnection;
     private boolean isBind = false;
@@ -36,7 +45,26 @@ public class FocusingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(DEBUG_TAG, "onCreate called");
+        // Hide the bottom bar with back button, home button and recent apps button.
+        Window window = getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION|View.SYSTEM_UI_FLAG_IMMERSIVE;
+        window.setAttributes(params);
         setContentView(R.layout.activity_focusing);
+
+        // Ref: https://stackoverflow.com/questions/8881951/detect-home-button-press-in-android
+        mHomeWatcher = new HomeWatcher(this);
+        mHomeWatcher.setOnHomePressedListener(new OnHomePressedListener() {
+            @Override
+            public void onHomePressed() {
+                distracted();
+            }
+            @Override
+            public void onRecentAppsPressed() {
+                distracted();
+            }
+        });
+        mHomeWatcher.startWatch();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -106,11 +134,35 @@ public class FocusingActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickFocusInterrupt(View view) {
-        this.finish();
+    private boolean isAppOnForeground(Context context) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        if (appProcesses == null) {
+            return false;
+        }
+        final String packageName = context.getPackageName();
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
+                    && appProcess.processName.equals(packageName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void onClickFocusTerminate(View view) {
-        this.finish();
+    @Override
+    public void onBackPressed() {} // DO NOTHING
+
+    private void distracted() {
+        // Todo: pause_timer.start();
+        // Todo: send notification;
+        Log.d("pengze", "YOU ARE DISTRACTED");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Todo: timer < threshold ? continue : break;
+        Log.d("pengze", "YOU ARE FOCUSED");
     }
 }
