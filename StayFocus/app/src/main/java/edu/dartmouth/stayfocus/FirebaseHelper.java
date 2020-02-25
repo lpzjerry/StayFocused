@@ -2,6 +2,10 @@ package edu.dartmouth.stayfocus;
 
 import android.util.Log;
 
+<<<<<<< HEAD
+=======
+import com.google.firebase.auth.FirebaseAuth;
+>>>>>>> master
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -56,6 +60,7 @@ public class FirebaseHelper {
                     }
                 });
     }
+<<<<<<< HEAD
 
     public void editData(int position, final Entry entry){
         database.child("users").child(userId).child("items")
@@ -76,6 +81,30 @@ public class FirebaseHelper {
         });
     }
 
+=======
+
+    public void editData(int position, final Entry entry){
+        database.child("users").child(userId).child("items")
+                .orderByChild("title")
+                .equalTo((String)test_list1.listView.getItemAtPosition(position))
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot edtData: dataSnapshot.getChildren()){
+                            edtData.getRef().setValue(entry);
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+
+                    }
+                });
+    }
+
+
+>>>>>>> master
     public void deleteAllEntry(){
         database.child("users").child(userId).child("items").removeValue();
     }

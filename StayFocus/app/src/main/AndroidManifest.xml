@@ -9,6 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TodoEditActivity"></activity>
+        <activity
+            android:name=".TodoActivity"
+            android:label="@string/title_activity_todo"
+            android:theme="@style/AppTheme.NoActionBar" />
         <service
             android:name=".Focus.TimerService"
             android:enabled="true"
