@@ -36,26 +36,21 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-<<<<<<< HEAD
     // Room components
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     annotationProcessor "androidx.room:room-compiler:$rootProject.roomVersion"
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
-
-// Lifecycle components
-    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
-
-// UI
-    implementation "com.google.android.material:material:$rootProject.materialVersion"
-
-// Testing
-    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-=======
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.github.dhimant1990:TimerTextView:v1.0'
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
+    // UI
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    // Testing
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
@@ -64,5 +59,4 @@ allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
     }
->>>>>>> master
 }
