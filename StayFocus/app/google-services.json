@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "556290459836",
+    "firebase_url": "https://cs165-c37dc.firebaseio.com",
+    "project_id": "cs165-c37dc",
+    "storage_bucket": "cs165-c37dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556290459836:android:358d89289d43e6648528b9",
+        "android_client_info": {
+          "package_name": "edu.dartmouth.stayfocus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556290459836-46hpki558qna908ft90jeplmb64nlftk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWy6hKRJLVcjGZOU4HAWVIzzWPTVN2N-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556290459836-46hpki558qna908ft90jeplmb64nlftk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

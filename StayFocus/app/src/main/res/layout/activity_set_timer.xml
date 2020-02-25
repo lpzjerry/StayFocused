@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setfocus"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.setfocus.SetFocusFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:weightSum="6">
+        <EditText
+            android:id="@+id/et_hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:hint="0"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/tv_hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="hours" />
+        <EditText
+            android:id="@+id/et_minute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:hint="0"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/tv_minute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="minutes" />
+        <EditText
+            android:id="@+id/et_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:hint="0"
+            android:inputType="number" />
+        <TextView
+            android:id="@+id/tv_second"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="seconds" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/button_set_focus_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_button_start"
+            android:onClick="onClickSetFocusStart"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/button_set_focus_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_button_cancel"
+            android:onClick="onClickSetFocusCancel"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</RelativeLayout>
