@@ -1,5 +1,6 @@
 package edu.dartmouth.stayfocus;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,7 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -30,6 +37,7 @@ public class test_list1 extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private String mUserId;
     public static ListView listView;
+    public GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +57,11 @@ public class test_list1 extends AppCompatActivity {
             mUserId = mFirebaseUser.getUid();
 
             // Set up ListView
-//            final ListView listView = (ListView) findViewById(R.id.listView);
-            listView = (ListView) findViewById(R.id.listView);
+            final ListView listView = (ListView) findViewById(R.id.listView);
 
             final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
             listView.setAdapter(adapter);
+
 
             // Add items via the Button and EditText at the bottom of the view.
             final EditText text = (EditText) findViewById(R.id.todoText);
@@ -67,12 +75,17 @@ public class test_list1 extends AppCompatActivity {
                 }
             });
 
+//            FirebaseHelper helper = new FirebaseHelper();
+//            helper.EventListener();
+
             // Use Firebase to populate the list.
             mDatabase.child("users").child(mUserId).child("items").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    Log.d("add", dataSnapshot.getValue() + "");
                     adapter.add((String) dataSnapshot.child("title").getValue());
                 }
+
 
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -146,9 +159,28 @@ public class test_list1 extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.log_out) {
             mFirebaseAuth.signOut();
+            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
             loadLogInView();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onStart() {
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+        googleApiClient.connect();
+        super.onStart();
     }
 }
