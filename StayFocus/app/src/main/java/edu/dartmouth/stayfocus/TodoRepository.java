@@ -1,6 +1,7 @@
 package edu.dartmouth.stayfocus;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -36,6 +37,19 @@ public class TodoRepository {
     public void insert(Todo todo){
         TodoRoomDatabase.databaseWriteExecutor.execute(() ->{
             mTodoDao.insert(todo);
+        });
+        Log.d("debug555", "repository called");
+    }
+
+    public void delete(Todo todo){
+        TodoRoomDatabase.databaseWriteExecutor.execute(() ->{
+            mTodoDao.delete(todo);
+        });
+    }
+
+    public void update(Todo todo){
+        TodoRoomDatabase.databaseWriteExecutor.execute(() ->{
+            mTodoDao.update(todo);
         });
     }
 }

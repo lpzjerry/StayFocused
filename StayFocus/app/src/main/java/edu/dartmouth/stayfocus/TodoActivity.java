@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
+import java.util.Date;
+
 import edu.dartmouth.stayfocus.DialogFragment.DatePickerFragment;
 import edu.dartmouth.stayfocus.DialogFragment.TimePickerFragment;
 
@@ -24,13 +26,15 @@ public class TodoActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.example.android.todolistsql.REPLY";
 
+    public Date datePicked = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
 
-        EditText editTextTitle = (EditText)findViewById(R.id.title);
+        final EditText editTextTitle = (EditText)findViewById(R.id.title);
 
 
 
@@ -38,9 +42,11 @@ public class TodoActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                showInputDialog("Notes", EditorInfo.TYPE_CLASS_TEXT);
+                showInputDialog("Notes", EditorInfo.TYPE_CLASS_TEXT, (EditText)findViewById(R.id.notes));
             }
         });
+
+        EditText editTextNotes = (EditText) findViewById(R.id.notes);
 
         findViewById(R.id.BNRecordSave).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +57,9 @@ public class TodoActivity extends AppCompatActivity {
                 } else {
                     String title = editTextTitle.getText().toString();
                     replyIntent.putExtra(EXTRA_REPLY, title);
+                    String notes = editTextNotes.getText().toString();
+                    replyIntent.putExtra("notes", notes);
+                    replyIntent.putExtra("duedate", datePicked);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();
@@ -76,7 +85,7 @@ public class TodoActivity extends AppCompatActivity {
         finish();
     }
 
-    public void showInputDialog(String title, int type){
+    public void showInputDialog(String title, int type, final EditText view){
         final EditText editText = new EditText(this);
         editText.setInputType(type);
         AlertDialog alertDialog = new AlertDialog.Builder(this).setTitle(title)
@@ -85,6 +94,7 @@ public class TodoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String task = String.valueOf(editText.getText());
+                        view.setText(task);
                     }
                 })
                 .setNegativeButton("CANCEL", null)

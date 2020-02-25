@@ -15,8 +15,8 @@ import edu.dartmouth.stayfocus.R;
 import edu.dartmouth.stayfocus.TodoActivity;
 import edu.dartmouth.stayfocus.TodoEditActivity;
 
-public class DatePickerFragment extends DialogFragment
-        implements DatePickerDialog.OnDateSetListener {
+public class DatePickerFragmentEdit extends DialogFragment
+        implements DatePickerDialog.OnDateSetListener{
     Calendar calendar = Calendar.getInstance();
 
     @Override
@@ -25,10 +25,9 @@ public class DatePickerFragment extends DialogFragment
         date.setYear(year);
         date.setMonth(month);
         date.setDate(dayOfMonth);
-        ((TodoActivity)getActivity()).datePicked = date;
 
-
-        EditText editText = getActivity().findViewById(R.id.editDate);
+        ((TodoEditActivity)getActivity()).datePicked2 = date;
+        EditText editText = getActivity().findViewById(R.id.dueDateEdit);
         editText.setText(year+"/"+(month+1)+"/"+dayOfMonth);
     }
 

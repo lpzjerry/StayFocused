@@ -1,6 +1,7 @@
 package edu.dartmouth.stayfocus.ui.home;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -27,6 +28,15 @@ public class HomeViewModel extends AndroidViewModel{
 
     public void insert(Todo todo){
         mRepository.insert(todo);
+        Log.d("debug555", "homeviewmodel insert called");
+    }
+
+    public void delete(Todo todo){
+        mRepository.delete(todo);
+    }
+
+    public void update(Todo todo){
+        mRepository.update(todo);
     }
 
 }

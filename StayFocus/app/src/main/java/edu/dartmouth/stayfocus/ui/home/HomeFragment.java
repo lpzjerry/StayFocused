@@ -17,13 +17,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.Date;
 import java.util.List;
 
 import edu.dartmouth.stayfocus.R;
 import edu.dartmouth.stayfocus.TodoActivity;
+import edu.dartmouth.stayfocus.TodoEditActivity;
 import edu.dartmouth.stayfocus.room.Todo;
 
 import static android.app.Activity.RESULT_OK;
+import static edu.dartmouth.stayfocus.TodoActivity.EXTRA_REPLY;
 
 public class HomeFragment extends Fragment {
 
@@ -35,6 +38,7 @@ public class HomeFragment extends Fragment {
     FloatingActionButton fab;
 
     public static final int TODOACTIVITY_REQUEST_CODE = 1;
+    public static final int TODOEDITACTIVITY_REQUEST_CODE = 2;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_todo, container, false);
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerview);
-        final TodoListAdapter adapter = new TodoListAdapter(getContext());
+        final TodoListAdapter adapter = new TodoListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -70,8 +74,26 @@ public class HomeFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == TODOACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
-            Todo todo = new Todo(data.getStringExtra(TodoActivity.EXTRA_REPLY));
+            Todo todo = new Todo();
+            String title = data.getStringExtra(EXTRA_REPLY);
+            todo.setTitle(title);
+            String notes = data.getStringExtra("notes");
+            todo.setNotes(notes);
+            Date dueDate = (Date)data.getSerializableExtra("duedate");
+            Date createDate = new Date();
+            todo.setDueDate(dueDate);
+            todo.setCreateTime(createDate);
             homeViewModel.insert(todo);
+        }else if(requestCode == TODOEDITACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
+            Boolean isDelete = data.getBooleanExtra("isDelete", false);
+            if(!isDelete) {
+                Todo todo = (Todo) data.getSerializableExtra("todoEdit");
+                Log.d("debug555", "onActivitySaveCalled" + todo.isCompleted() + todo.getTitle());
+                homeViewModel.update(todo);
+            }else{
+                Todo todo = (Todo)data.getSerializableExtra("todoDelete");
+                homeViewModel.delete(todo);
+            }
         }else{
             Toast.makeText(
                     getActivity().getApplicationContext(),

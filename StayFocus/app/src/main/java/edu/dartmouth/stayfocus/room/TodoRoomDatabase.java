@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Todo.class}, version =  1, exportSchema = false)
+@Database(entities = {Todo.class}, version =  2, exportSchema = false)
 public abstract class TodoRoomDatabase extends RoomDatabase {
 
     public abstract TodoDao todoDao();
@@ -24,7 +24,8 @@ public abstract class TodoRoomDatabase extends RoomDatabase {
             synchronized (TodoRoomDatabase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TodoRoomDatabase.class, "todolist_database")
+                            TodoRoomDatabase.class, "todo_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }
