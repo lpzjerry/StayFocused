@@ -45,8 +45,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.github.dhimant1990:TimerTextView:v1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
-<<<<<<< HEAD
-=======
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
@@ -54,7 +52,6 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     // Testing
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
->>>>>>> master
 }
 
 apply plugin: 'com.google.gms.google-services'
