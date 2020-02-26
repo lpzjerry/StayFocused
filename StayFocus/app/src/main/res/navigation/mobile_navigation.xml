@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_record"
-        android:name="edu.dartmouth.stayfocus.ui.slideshow.SlideshowFragment"
+        android:name="edu.dartmouth.stayfocus.ui.slideshow.RecordFragment"
         android:label="@string/menu_record"
         tools:layout="@layout/fragment_record" />
 
@@ -34,5 +34,6 @@
         android:name="edu.dartmouth.stayfocus.ui.send.SendFragment"
         android:label="@string/menu_send"
         tools:layout="@layout/fragment_send" />
+
 
 </navigation>
