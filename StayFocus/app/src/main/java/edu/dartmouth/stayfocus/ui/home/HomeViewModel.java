@@ -1,19 +1,42 @@
 package edu.dartmouth.stayfocus.ui.home;
 
+import android.app.Application;
+import android.util.Log;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+import java.util.List;
 
-    private MutableLiveData<String> mText;
+import edu.dartmouth.stayfocus.TodoRepository;
+import edu.dartmouth.stayfocus.room.Todo;
 
-    public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+public class HomeViewModel extends AndroidViewModel{
+    private TodoRepository mRepository;
+
+    private LiveData<List<Todo>> mAllTodoList;
+
+    public HomeViewModel(Application application) {
+        super(application);
+        mRepository = new TodoRepository(application);
+        mAllTodoList = mRepository.getAllTodoList();
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    LiveData<List<Todo>> getAllTodoList(){
+        return mAllTodoList;
     }
+
+    public void insert(Todo todo){
+        mRepository.insert(todo);
+        Log.d("debug555", "homeviewmodel insert called");
+    }
+
+    public void delete(Todo todo){
+        mRepository.delete(todo);
+    }
+
+    public void update(Todo todo){
+        mRepository.update(todo);
+    }
+
 }

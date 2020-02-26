@@ -58,6 +58,7 @@ public class FirebaseHelper {
                 });
     }
 
+
 //    public void editData(int position, final Entry entry){
 //        database.child("users").child(userId).child("items")
 //                .orderByChild("title")
@@ -76,6 +77,7 @@ public class FirebaseHelper {
 //            }
 //        });
 //    }
+
 
     public void deleteAllEntry(){
         database.child("users").child(userId).child("items").removeValue();
