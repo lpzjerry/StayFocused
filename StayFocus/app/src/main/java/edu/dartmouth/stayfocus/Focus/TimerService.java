@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 public class TimerService extends Service {
 
-    private static final String DEBUG_TAG = "Timer Service";
+    private static final String DEBUG_TAG = "pengze";
     private MyBinder myBinder;
     private Handler uIMsgHandler;
     private Timer timer;
