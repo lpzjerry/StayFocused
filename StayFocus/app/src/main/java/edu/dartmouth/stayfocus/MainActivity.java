@@ -36,6 +36,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity{
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -74,6 +75,34 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        Button buttonShare = (Button)findViewById(R.id.share_link);
+        Button buttonLogout = (Button)findViewById(R.id.logout);
+        buttonShare.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = "Stay Focus APP";
+                String shareSub = "https://home.cs.dartmouth.edu/~pengze/stayfocus/";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
+                startActivity(Intent.createChooser(myIntent, "Share using"));
+            }
+        });
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+
+                Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                        new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(Status status) {
+                                Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                loadLogInView();
+            }
+        });
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -91,8 +120,6 @@ public class MainActivity extends AppCompatActivity{
 
         }
     }
-
-
 
     @Override
     protected void onStart() {
