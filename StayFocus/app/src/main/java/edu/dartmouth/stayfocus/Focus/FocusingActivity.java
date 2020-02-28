@@ -196,17 +196,35 @@ public class FocusingActivity extends AppCompatActivity {
         sendBroadcast(intent);
     }
 
+//    @Override
+//    public void finish() {
+//        super.finish();
+//        Log.d(DEBUG_TAG, "finish");
+//
+//        Intent intent = new Intent();
+//        intent.setAction(NotifyService.ACTION);
+//        intent.putExtra(NotifyService.STOP_SERVICE_BROADCAST_KEY,
+//                NotifyService.RQS_STOP_SERVICE);
+//        //sendBroadcast(intent);
+//        appContext.stopService(intent);
+//
+//        // TODO return Entry
+//        Entry entry = new Entry();
+//        new FirebaseHelper().addEntry(entry);
+//    }
+
     @Override
-    public void finish() {
-        super.finish();
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(DEBUG_TAG, "finish");
 
-        Intent intent = new Intent();
-        intent.setAction(NotifyService.ACTION);
-        intent.putExtra(NotifyService.STOP_SERVICE_BROADCAST_KEY,
-                NotifyService.RQS_STOP_SERVICE);
-        sendBroadcast(intent);
+        Intent intent = new Intent(this, NotifyService.class);
+        //intent.setAction(NotifyService.ACTION);
+        //intent.putExtra(NotifyService.STOP_SERVICE_BROADCAST_KEY,
+                //NotifyService.RQS_STOP_SERVICE);
+        //sendBroadcast(intent);
+        appContext.stopService(intent);
 
-        // TODO return Entry
         Entry entry = new Entry();
         new FirebaseHelper().addEntry(entry);
     }

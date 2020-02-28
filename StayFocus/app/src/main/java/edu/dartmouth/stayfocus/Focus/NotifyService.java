@@ -56,6 +56,8 @@ public class NotifyService extends Service {
     @Override
     public void onDestroy() {
         notificationManager.cancelAll();
+        if (vibrator != null)
+            vibrator.cancel();
         this.unregisterReceiver(notifyServiceReceiver);
         super.onDestroy();
     }
