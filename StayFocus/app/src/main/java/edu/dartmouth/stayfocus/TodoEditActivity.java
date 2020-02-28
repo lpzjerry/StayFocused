@@ -75,14 +75,12 @@ public class TodoEditActivity extends AppCompatActivity {
 
         CheckBox checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
         Boolean isCompleted = checkBox1.isChecked();
-        if(isCompleted){
-            todo.setCompleted(true);
-        }
+        todo.setCompleted(isCompleted);
+
         CheckBox checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
         Boolean isImportant = checkBox2.isChecked();
-        if(isImportant){
-            todo.setImportant(true);
-        }
+        todo.setImportant(isImportant);
+
         Date updateTime = new Date();
         todo.setUpdateTime(updateTime);
         Log.d("debug555", ""+todo.isCompleted());
