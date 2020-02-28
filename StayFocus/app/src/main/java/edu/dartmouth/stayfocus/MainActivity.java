@@ -144,25 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        //Log out account
-        if (id == R.id.log_out) {
-
-            firebaseAuth.signOut();
-
-            Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-                    new ResultCallback<Status>() {
-                        @Override
-                        public void onResult(Status status) {
-                            Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-            loadLogInView();
-        }
-
-
+       
         return super.onOptionsItemSelected(item);
     }
 

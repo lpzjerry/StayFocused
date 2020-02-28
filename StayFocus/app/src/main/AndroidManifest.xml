@@ -30,7 +30,6 @@
             android:name=".Focus.FocusingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".test_list1" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LogInActivity" />
         <activity
