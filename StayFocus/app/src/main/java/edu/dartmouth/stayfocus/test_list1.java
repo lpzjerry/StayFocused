@@ -68,7 +68,7 @@ public class test_list1 extends AppCompatActivity {
             final Button button = (Button) findViewById(R.id.addButton);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Entry item = new Entry(text.getText().toString(), "1");
+                    Entry item = new Entry(text.getText().toString(), text.getText().toString(), "30min", "success");
                     FirebaseHelper helper = new FirebaseHelper();
                     helper.addEntry(item);
                     text.setText("");
@@ -129,7 +129,7 @@ public class test_list1 extends AppCompatActivity {
 //                                }
 //                            });
                     FirebaseHelper helper = new FirebaseHelper();
-                    helper.deleteEntry(position);
+                    helper.deleteAllEntry();
                 }
             });
         }

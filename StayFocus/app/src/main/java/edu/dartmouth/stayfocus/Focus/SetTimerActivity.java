@@ -20,7 +20,7 @@ public class SetTimerActivity extends AppCompatActivity {
     public void onClickSetFocusStart(View view) {
         Intent intent = new Intent(this, FocusingActivity.class);
         Bundle bundle = new Bundle();
-        int hour = 0, minute = 0, second = 0;
+        int hour = 0, minute = 1, second = 0;
 
         EditText hourText = (EditText) findViewById(R.id.et_hour);
         String hourStr = hourText.getText().toString();
@@ -31,16 +31,13 @@ public class SetTimerActivity extends AppCompatActivity {
         String minuteStr = minuteText.getText().toString();
         if (!minuteStr.isEmpty())
             minute = Integer.parseInt(minuteStr);
-        // Second
-        EditText secondText = (EditText) findViewById(R.id.et_second);
-        String secondStr = secondText.getText().toString();
-        if (!secondStr.isEmpty())
-            second = Integer.parseInt(secondStr);
+
         bundle.putInt("hour", hour);
         bundle.putInt("minute", minute);
         bundle.putInt("second", second);
         intent.putExtras(bundle);
-        startActivity(intent);
+        if (hour > 0 || minute > 0)
+            startActivity(intent);
         this.finish();
     }
 

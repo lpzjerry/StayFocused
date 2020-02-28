@@ -1,6 +1,8 @@
 package edu.dartmouth.stayfocus;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import com.google.android.gms.auth.api.Auth;
@@ -15,6 +17,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.dartmouth.stayfocus.Focus.SetTimerActivity;
@@ -45,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.VIBRATE}, 0);
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
             // Not logged in, launch the Log In activity
             loadLogInView();
         } else{
+
+            View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+            TextView email = headerView.findViewById(R.id.nav_user);
+            email.setText(firebaseAuth.getCurrentUser().getEmail());
 
         }
     }
