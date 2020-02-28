@@ -103,7 +103,7 @@ public class LogInActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Intent intent = new Intent(LogInActivity.this, test_list1.class);
+                                        Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);
@@ -179,7 +179,7 @@ public class LogInActivity extends AppCompatActivity {
 
                         if (AuthResultTask.isSuccessful()){
                             // Getting Current Login user details.
-                            Intent intent = new Intent(LogInActivity.this, test_list1.class);
+                            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

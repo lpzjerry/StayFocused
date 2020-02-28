@@ -83,6 +83,8 @@ public class TodoEditActivity extends AppCompatActivity {
         if(isImportant){
             todo.setImportant(true);
         }
+        Date updateTime = new Date();
+        todo.setUpdateTime(updateTime);
         Log.d("debug555", ""+todo.isCompleted());
         replyIntent.putExtra("todoEdit", todo);
 
