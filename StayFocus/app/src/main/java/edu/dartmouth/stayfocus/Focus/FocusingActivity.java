@@ -90,8 +90,8 @@ public class FocusingActivity extends AppCompatActivity {
         futureTimestamp = System.currentTimeMillis() + (hour * 60 * 60 * 1000)
                + (minute * 60 * 1000) + (second * 1000);
         Log.d(DEBUG_TAG, "futureTimeStamp: " + futureTimestamp);
-        TimerTextView timerText = (TimerTextView) this.findViewById(R.id.timerText);
-        timerText.setEndTime(futureTimestamp);
+        // TimerTextView timerText = (TimerTextView) this.findViewById(R.id.timerText);
+        // timerText.setEndTime(futureTimestamp);
 
         timerTextView = (TextView) findViewById(R.id.tv_countdown_timer);
 
