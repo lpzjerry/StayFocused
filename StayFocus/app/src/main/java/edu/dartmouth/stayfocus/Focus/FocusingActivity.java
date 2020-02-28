@@ -143,6 +143,7 @@ public class FocusingActivity extends AppCompatActivity {
                 timerTextView.setText(format("%02d:%02d:%02d", hours, minutes, seconds));
                 if (hours <= 0 && minutes <= 0 && seconds <= 0) {
                     FocusingActivity.this.finish();
+                    unBindService();
                 }
             }
         }

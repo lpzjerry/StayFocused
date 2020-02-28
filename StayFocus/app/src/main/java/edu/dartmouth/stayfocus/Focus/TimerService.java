@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 public class TimerService extends Service {
 
-    private static final String DEBUG_TAG = "pengze";
+    private static final String DEBUG_TAG = "Timer";
     private MyBinder myBinder;
     private Handler uIMsgHandler;
     private Timer timer;
@@ -39,10 +39,10 @@ public class TimerService extends Service {
         myBinder = new MyBinder();
         uIMsgHandler = null;
 
-        timer = new Timer();
-        myTask = new MyTask();
-
-        timer.scheduleAtFixedRate(myTask, 0, 1000L);
+//        timer = new Timer();
+//        myTask = new MyTask();
+//
+//        timer.scheduleAtFixedRate(myTask, 0, 1000L);
 
     }
 
@@ -56,12 +56,18 @@ public class TimerService extends Service {
         millisUntilFinished = futureTimestamp - currentTimestamp;
         Log.d(DEBUG_TAG, "remainTime: "+millisUntilFinished);
 
+        timer = new Timer();
+        myTask = new MyTask();
+
+        timer.scheduleAtFixedRate(myTask, 0, 1000L);
+
         return START_NOT_STICKY;
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(DEBUG_TAG, "onBind called");
+
 
         return myBinder;
     }
@@ -92,6 +98,7 @@ public class TimerService extends Service {
 
             try {
                 millisUntilFinished -= 1000L;
+                Log.d(DEBUG_TAG, "millisUntilFinish: "+millisUntilFinished);
                 if(millisUntilFinished < 0){
                     timeout = true;
                 }
@@ -102,10 +109,13 @@ public class TimerService extends Service {
                     message.setData(bundle);
                     message.what = MSG_REMAIN_TIME;
                     uIMsgHandler.sendMessage(message);
+                    Log.d(DEBUG_TAG,"message sent");
                 }
 
                 if(timeout) {
-                    //TODO: stop
+                    myTask.cancel();
+                    timer.cancel();
+                    timeout = false;
                 }
 
             } catch (Throwable t) {
