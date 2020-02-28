@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -12,11 +13,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import edu.dartmouth.stayfocus.Entry;
+import edu.dartmouth.stayfocus.FirebaseHelper;
 import edu.dartmouth.stayfocus.R;
 
 public class SendFragment extends Fragment {
 
     private SendViewModel sendViewModel;
+    Calendar rightNow;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +37,21 @@ public class SendFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+        Button button = (Button)root.findViewById(R.id.test_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                rightNow = Calendar.getInstance();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String formattedDate = df.format(rightNow.getTime());
+                Entry item = new Entry(formattedDate,formattedDate, "30min", "failed");
+                FirebaseHelper helper = new FirebaseHelper();
+                helper.addEntry(item);
+
+            }
+        });
         return root;
     }
+
+
 }

@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.dartmouth.stayfocus.Focus.SetTimerActivity;
@@ -68,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
             // Not logged in, launch the Log In activity
             loadLogInView();
         } else{
+
+            View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+            TextView email = headerView.findViewById(R.id.nav_user);
+            email.setText(firebaseAuth.getCurrentUser().getEmail());
 
         }
     }
