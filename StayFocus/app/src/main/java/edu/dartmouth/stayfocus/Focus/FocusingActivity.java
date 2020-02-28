@@ -32,6 +32,7 @@ import org.w3c.dom.Text;
 import java.util.concurrent.TimeUnit;
 
 import edu.dartmouth.stayfocus.Entry;
+import edu.dartmouth.stayfocus.FirebaseHelper;
 import edu.dartmouth.stayfocus.R;
 
 import static java.lang.Math.ceil;
@@ -89,8 +90,8 @@ public class FocusingActivity extends AppCompatActivity {
         futureTimestamp = System.currentTimeMillis() + (hour * 60 * 60 * 1000)
                + (minute * 60 * 1000) + (second * 1000);
         Log.d(DEBUG_TAG, "futureTimeStamp: " + futureTimestamp);
-        // TimerTextView timerText = (TimerTextView) this.findViewById(R.id.timerText);
-        // timerText.setEndTime(futureTimestamp);
+        TimerTextView timerText = (TimerTextView) this.findViewById(R.id.timerText);
+        timerText.setEndTime(futureTimestamp);
 
         timerTextView = (TextView) findViewById(R.id.tv_countdown_timer);
 
@@ -207,5 +208,6 @@ public class FocusingActivity extends AppCompatActivity {
 
         // TODO return Entry
         Entry entry = new Entry();
+        new FirebaseHelper().addEntry(entry);
     }
 }
