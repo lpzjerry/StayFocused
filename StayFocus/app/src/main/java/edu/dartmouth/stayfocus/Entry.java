@@ -7,7 +7,12 @@ public class Entry {
     private String duration;
     private String success;
 
-    public Entry() {}
+    public Entry() {
+        startTime = "Feb 28 12:00";
+        endTime = "Feb 28 12:10";
+        duration = "10 min";
+        success = "Success";
+    }
 
     public Entry(String startTime, String endTime, String duration, String success) {
         this.startTime = startTime;
