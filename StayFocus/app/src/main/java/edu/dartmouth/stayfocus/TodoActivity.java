@@ -21,6 +21,7 @@ import java.util.Date;
 
 import edu.dartmouth.stayfocus.DialogFragment.DatePickerFragment;
 import edu.dartmouth.stayfocus.DialogFragment.TimePickerFragment;
+import edu.dartmouth.stayfocus.room.Todo;
 
 public class TodoActivity extends AppCompatActivity {
 
@@ -28,11 +29,14 @@ public class TodoActivity extends AppCompatActivity {
 
     public Date datePicked = null;
 
+    private Todo todo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo);
+
+        todo = new Todo();
 
         final EditText editTextTitle = (EditText)findViewById(R.id.title);
 
@@ -56,10 +60,13 @@ public class TodoActivity extends AppCompatActivity {
                     setResult(RESULT_CANCELED, replyIntent);
                 } else {
                     String title = editTextTitle.getText().toString();
-                    replyIntent.putExtra(EXTRA_REPLY, title);
+                    todo.setTitle(title);
                     String notes = editTextNotes.getText().toString();
-                    replyIntent.putExtra("notes", notes);
-                    replyIntent.putExtra("duedate", datePicked);
+                    todo.setNotes(notes);
+                    todo.setDueDate(datePicked);
+                    Date createDate = new Date();
+                    todo.setCreateTime(createDate);
+                    replyIntent.putExtra(EXTRA_REPLY, todo);
                     setResult(RESULT_OK, replyIntent);
                 }
                 finish();
