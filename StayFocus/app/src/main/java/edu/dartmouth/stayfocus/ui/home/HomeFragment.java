@@ -74,15 +74,7 @@ public class HomeFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == TODOACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
-            Todo todo = new Todo();
-            String title = data.getStringExtra(EXTRA_REPLY);
-            todo.setTitle(title);
-            String notes = data.getStringExtra("notes");
-            todo.setNotes(notes);
-            Date dueDate = (Date)data.getSerializableExtra("duedate");
-            Date createDate = new Date();
-            todo.setDueDate(dueDate);
-            todo.setCreateTime(createDate);
+            Todo todo = (Todo)data.getSerializableExtra(EXTRA_REPLY);
             homeViewModel.insert(todo);
         }else if(requestCode == TODOEDITACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
             Boolean isDelete = data.getBooleanExtra("isDelete", false);

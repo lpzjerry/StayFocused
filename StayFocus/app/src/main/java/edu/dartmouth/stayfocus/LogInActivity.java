@@ -179,7 +179,6 @@ public class LogInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task AuthResultTask) {
 
                         if (AuthResultTask.isSuccessful()){
-
                             Intent intent = new Intent(LogInActivity.this, MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
