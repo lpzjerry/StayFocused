@@ -12,12 +12,15 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.IBinder;
 import android.util.Log;
+import android.os.Vibrator;
+import android.os.VibrationEffect;
 
 import androidx.core.app.NotificationCompat;
 
 import edu.dartmouth.stayfocus.R;
 
 public class NotifyService extends Service {
+    Vibrator vibrator;
 
     // MyRuns
     private NotificationManager notificationManager;
@@ -71,6 +74,9 @@ public class NotifyService extends Service {
             int rqs = arg1.getIntExtra(STOP_SERVICE_BROADCAST_KEY, 0);
 
             if (rqs == RQS_STOP_SERVICE) {
+                if (vibrator != null) {
+                    vibrator.cancel();
+                }
                 stopSelf();
                 notificationManager.cancelAll();
             }
@@ -92,5 +98,10 @@ public class NotifyService extends Service {
         builder.setSmallIcon(R.drawable.ic_menu_send);
         Notification notification = builder.build();
         notificationManager.notify(Notification_ID, notification);
+        // Vibrate
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            vibrator.vibrate(VibrationEffect.createOneShot(100000, VibrationEffect.DEFAULT_AMPLITUDE));
+        }
     }
 }
