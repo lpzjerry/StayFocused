@@ -16,7 +16,7 @@ import java.util.TimerTask;
 
 public class TimerService extends Service {
 
-    private static final String DEBUG_TAG = "Timer Service";
+    private static final String DEBUG_TAG = "Timer";
     private MyBinder myBinder;
     private Handler uIMsgHandler;
     private Timer timer;
@@ -39,11 +39,6 @@ public class TimerService extends Service {
         myBinder = new MyBinder();
         uIMsgHandler = null;
 
-        timer = new Timer();
-        myTask = new MyTask();
-
-        timer.scheduleAtFixedRate(myTask, 0, 1000L);
-
     }
 
     @Override
@@ -53,8 +48,9 @@ public class TimerService extends Service {
         futureTimestamp = intent.getLongExtra("timeStamp", 0);
         currentTimestamp = System.currentTimeMillis();
         Log.d(DEBUG_TAG, "currentTime: "+currentTimestamp);
-        millisUntilFinished = futureTimestamp - currentTimestamp;
+        millisUntilFinished = futureTimestamp - currentTimestamp + 1000;
         Log.d(DEBUG_TAG, "remainTime: "+millisUntilFinished);
+
 
         return START_NOT_STICKY;
     }
@@ -62,6 +58,9 @@ public class TimerService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(DEBUG_TAG, "onBind called");
+
+
+
 
         return myBinder;
     }
@@ -83,6 +82,10 @@ public class TimerService extends Service {
     public class MyBinder extends Binder {
         public void getUIMsgHandler(Handler msgHandler) {
             uIMsgHandler = msgHandler;
+            timer = new Timer();
+            myTask = new MyTask();
+
+            timer.scheduleAtFixedRate(myTask, 0, 1000L);
         }
     }
 
@@ -91,21 +94,25 @@ public class TimerService extends Service {
         public void run() {
 
             try {
-                millisUntilFinished -= 1000L;
-                if(millisUntilFinished < 0){
-                    timeout = true;
-                }
-                if(uIMsgHandler != null && !timeout) {
-                    Bundle bundle = new Bundle();
-                    bundle.putLong(NAME_BUNDLE_REMAIN_TIME, millisUntilFinished);
-                    Message message = uIMsgHandler.obtainMessage();
-                    message.setData(bundle);
-                    message.what = MSG_REMAIN_TIME;
-                    uIMsgHandler.sendMessage(message);
-                }
-
-                if(timeout) {
-                    //TODO: stop
+                if(!timeout) {
+                    millisUntilFinished -= 1000L;
+                    Log.d(DEBUG_TAG, "millisUntilFinish: " + millisUntilFinished);
+                    if (millisUntilFinished < 0) {
+                        timeout = true;
+                        timer.cancel();
+                        myTask.cancel();
+                    }
+                    if (uIMsgHandler != null && !timeout) {
+                        Bundle bundle = new Bundle();
+                        bundle.putLong(NAME_BUNDLE_REMAIN_TIME, millisUntilFinished);
+                        Message message = uIMsgHandler.obtainMessage();
+                        message.setData(bundle);
+                        message.what = MSG_REMAIN_TIME;
+                        uIMsgHandler.sendMessage(message);
+                        Log.d(DEBUG_TAG, "message sent");
+                    }
+                    if(uIMsgHandler == null)
+                        Log.d(DEBUG_TAG, "uIhandler is null");
                 }
 
             } catch (Throwable t) {

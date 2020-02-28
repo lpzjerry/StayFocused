@@ -2,28 +2,51 @@ package edu.dartmouth.stayfocus;
 
 public class Entry {
 
-    private String title;
-    private String id;
+    private String startTime;
+    private String endTime;
+    private String duration;
+    private String success;
 
-    public Entry() {}
-
-    public Entry(String title, String id) {
-        this.title = title;
-        this.id = id;
+    public Entry() {
+        startTime = "Feb 28 12:00";
+        endTime = "Feb 28 12:10";
+        duration = "10 min";
+        success = "Success";
     }
 
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
-        this.title = title;
+    public Entry(String startTime, String endTime, String duration, String success) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.duration = duration;
+        this.success = success;
     }
 
-    public String getId() {
-        return id;
+    public String getStartTime() {
+        return startTime;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getSuccess() {
+        return success;
+    }
+    public void setSuccess(String success) {
+        this.success = success;
     }
 }
 

@@ -14,7 +14,8 @@
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:weightSum="6">
+        android:layout_centerVertical="true"
+        android:weightSum="4">
         <EditText
             android:id="@+id/et_hour"
             android:layout_width="match_parent"
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:hint="0"
+            android:hint="1"
             android:inputType="number" />
         <TextView
             android:id="@+id/tv_minute"
@@ -43,20 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="minutes" />
-        <EditText
-            android:id="@+id/et_second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:hint="0"
-            android:inputType="number" />
-        <TextView
-            android:id="@+id/tv_second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="seconds" />
     </LinearLayout>
 
     <LinearLayout
