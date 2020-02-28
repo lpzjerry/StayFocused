@@ -3,6 +3,7 @@ package edu.dartmouth.stayfocus.Focus;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Application;
 import android.app.KeyguardManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,12 +34,13 @@ import java.util.concurrent.TimeUnit;
 import edu.dartmouth.stayfocus.Entry;
 import edu.dartmouth.stayfocus.R;
 
+import static java.lang.Math.ceil;
 import static java.lang.String.*;
 
 
 public class FocusingActivity extends AppCompatActivity {
 
-    private static final String DEBUG_TAG = "pengze";
+    private static final String DEBUG_TAG = "Timer";
     private int hour = 0, minute = 0, second = 0;
     private long futureTimestamp;
     private long remainTimestamp;
@@ -49,6 +51,8 @@ public class FocusingActivity extends AppCompatActivity {
     private boolean isBind = false;
     TimerHandler timerHandler;
     TextView timerTextView;
+
+    Application appContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +94,7 @@ public class FocusingActivity extends AppCompatActivity {
 
         timerTextView = (TextView) findViewById(R.id.tv_countdown_timer);
 
+        appContext = (Application) this.getApplicationContext();
         timerHandler = new TimerHandler();
         timerServiceConnection = new ServiceConnection() {
             @Override
@@ -117,14 +122,14 @@ public class FocusingActivity extends AppCompatActivity {
         Log.d(DEBUG_TAG, "start service called");
 
         if(!isBind) {
-            this.getApplicationContext().bindService(intent, timerServiceConnection, Context.BIND_AUTO_CREATE);
+            appContext.bindService(intent, timerServiceConnection, Context.BIND_AUTO_CREATE);
             isBind = true;
             Log.d(DEBUG_TAG, "Bind Service");
         }
     }
 
     public void unBindService() {
-        this.getApplicationContext().unbindService(timerServiceConnection);
+        appContext.unbindService(timerServiceConnection);
         isBind = false;
     }
 
@@ -134,15 +139,17 @@ public class FocusingActivity extends AppCompatActivity {
                 Bundle bundle = msg.getData();
                 remainTimestamp = bundle.getLong(TimerService.NAME_BUNDLE_REMAIN_TIME);
                 // Log.d(DEBUG_TAG, "remainTimestamp: " + remainTimestamp);
-                int seconds = (int) (remainTimestamp / 1000) % 60 ;
-                int minutes = (int) ((remainTimestamp / (1000*60)) % 60);
-                int hours   = (int) ((remainTimestamp / (1000*60*60)) % 24);
+                int seconds = (int)Math.ceil( (remainTimestamp / 1000) % 60);
+                int minutes = (int)Math.ceil( ((remainTimestamp / (1000*60)) % 60));
+                int hours   = (int)Math.ceil( ((remainTimestamp / (1000*60*60)) % 24));
                 // Log.d(DEBUG_TAG, hours + "h " + minutes + "min " + seconds +"s");
                 // Toast.makeText(getApplicationContext(),hours + "h " + minutes + "min " + seconds +"s" , Toast.LENGTH_SHORT).show();
                 timerTextView.setText(format("%02d:%02d:%02d", hours, minutes, seconds));
                 if (hours <= 0 && minutes <= 0 && seconds <= 0) {
                     FocusingActivity.this.finish();
                     unBindService();
+                    Intent intent = new Intent(FocusingActivity.this.getApplicationContext(), TimerService.class);
+                    stopService(intent);
                 }
             }
         }
