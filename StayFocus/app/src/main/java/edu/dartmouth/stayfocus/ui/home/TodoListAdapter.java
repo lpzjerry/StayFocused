@@ -2,6 +2,7 @@ package edu.dartmouth.stayfocus.ui.home;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +53,9 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
         if(mTodoList != null){
             Todo current = mTodoList.get(position);
             holder.todoItemView1.setText(current.getTitle());
+            if(current.isCompleted()){
+                holder.todoItemView1.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            }
             if(current.getDueDate() != null) {
                 holder.todoItemView2.setText(current.getDueDate().toString());
             }else{
