@@ -68,7 +68,7 @@ public class test_list1 extends AppCompatActivity {
             final Button button = (Button) findViewById(R.id.addButton);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Entry item = new Entry(text.getText().toString(), "1");
+                    Entry item = new Entry();
                     FirebaseHelper helper = new FirebaseHelper();
                     helper.addEntry(item);
                     text.setText("");
