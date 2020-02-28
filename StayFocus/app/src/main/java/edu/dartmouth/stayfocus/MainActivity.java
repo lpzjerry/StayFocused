@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -35,7 +37,7 @@ import android.widget.Toast;
 
 import edu.dartmouth.stayfocus.Focus.SetTimerActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth firebaseAuth;
@@ -51,16 +53,20 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_todo, R.id.nav_login, R.id.nav_record,
+                R.id.nav_todo,  R.id.nav_record,
                 R.id.nav_settings, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -74,8 +80,11 @@ public class MainActivity extends AppCompatActivity {
             TextView email = headerView.findViewById(R.id.nav_user);
             email.setText(firebaseAuth.getCurrentUser().getEmail());
 
+
         }
     }
+
+
 
     @Override
     protected void onStart() {
@@ -123,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
             loadLogInView();
         }
 
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -139,4 +149,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        Log.d("peixuan", "" + id);
+        switch (id) {
+            case R.id.nav_share:
+                Log.d("peixuan", "here");
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = "Stay Focus APP";
+                String shareSub = "https://home.cs.dartmouth.edu/~pengze/stayfocus/";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
+                startActivity(Intent.createChooser(myIntent, "Share using"));
+                return true;
+        }
+        return false;
+    }
 }

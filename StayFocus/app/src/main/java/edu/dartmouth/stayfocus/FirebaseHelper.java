@@ -40,7 +40,7 @@ public class FirebaseHelper {
 
     public void deleteEntry(int position, ListView listView){
         database.child("users").child(userId).child("items")
-                .orderByChild("start_time")
+                .orderByChild("startTime")
                 .equalTo(((Entry)listView.getItemAtPosition(position)).getStartTime())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
