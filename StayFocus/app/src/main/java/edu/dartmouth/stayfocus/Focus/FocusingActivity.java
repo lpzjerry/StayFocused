@@ -19,27 +19,36 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 
 import com.dhims.timerview.TimerTextView;
 
+import org.w3c.dom.Text;
+
 import java.util.concurrent.TimeUnit;
 
+import edu.dartmouth.stayfocus.Entry;
 import edu.dartmouth.stayfocus.R;
+
+import static java.lang.String.*;
 
 
 public class FocusingActivity extends AppCompatActivity {
 
-    private static final String DEBUG_TAG = "FocusingActivity";
+    private static final String DEBUG_TAG = "pengze";
     private int hour = 0, minute = 0, second = 0;
     private long futureTimestamp;
     private long remainTimestamp;
+    private String startTime, endTime, duration, success;
     public HomeWatcher mHomeWatcher;
 
     ServiceConnection timerServiceConnection;
     private boolean isBind = false;
     TimerHandler timerHandler;
+    TextView timerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +81,16 @@ public class FocusingActivity extends AppCompatActivity {
             minute = bundle.getInt("minute");
             second = bundle.getInt("second");
         }
+
         futureTimestamp = System.currentTimeMillis() + (hour * 60 * 60 * 1000)
-                + (minute * 60 * 1000) + (second * 1000);
+               + (minute * 60 * 1000) + (second * 1000);
+        Log.d(DEBUG_TAG, "futureTimeStamp: " + futureTimestamp);
+        // TimerTextView timerText = (TimerTextView) this.findViewById(R.id.timerText);
+        // timerText.setEndTime(futureTimestamp);
 
-
-        //Log.d(DEBUG_TAG, "futureTimeStamp: " + futureTimestamp);
-        TimerTextView timerText = (TimerTextView) this.findViewById(R.id.timerText);
-        timerText.setEndTime(futureTimestamp);
+        timerTextView = (TextView) findViewById(R.id.tv_countdown_timer);
 
         timerHandler = new TimerHandler();
-
         timerServiceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
@@ -124,18 +133,23 @@ public class FocusingActivity extends AppCompatActivity {
             if(msg.what == TimerService.MSG_REMAIN_TIME) {
                 Bundle bundle = msg.getData();
                 remainTimestamp = bundle.getLong(TimerService.NAME_BUNDLE_REMAIN_TIME);
-                Log.d(DEBUG_TAG, "remainTimestamp: " + remainTimestamp);
+                // Log.d(DEBUG_TAG, "remainTimestamp: " + remainTimestamp);
                 int seconds = (int) (remainTimestamp / 1000) % 60 ;
                 int minutes = (int) ((remainTimestamp / (1000*60)) % 60);
                 int hours   = (int) ((remainTimestamp / (1000*60*60)) % 24);
-                Log.d(DEBUG_TAG, hours + "h " + minutes + "min " + seconds +"s");
-                Toast.makeText(getApplicationContext(),hours + "h " + minutes + "min " + seconds +"s" , Toast.LENGTH_SHORT).show();
+                // Log.d(DEBUG_TAG, hours + "h " + minutes + "min " + seconds +"s");
+                // Toast.makeText(getApplicationContext(),hours + "h " + minutes + "min " + seconds +"s" , Toast.LENGTH_SHORT).show();
+                timerTextView.setText(format("%02d:%02d:%02d", hours, minutes, seconds));
+                if (hours <= 0 && minutes <= 0 && seconds <= 0) {
+                    FocusingActivity.this.finish();
+                }
             }
         }
     }
 
     private boolean isAppOnForeground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        assert activityManager != null;
         List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
         if (appProcesses == null) {
             return false;
@@ -157,6 +171,8 @@ public class FocusingActivity extends AppCompatActivity {
         // Todo: pause_timer.start();
         // Todo: send notification;
         Log.d("pengze", "YOU ARE DISTRACTED");
+        Intent intent = new Intent(FocusingActivity.this, NotifyService.class);
+        FocusingActivity.this.startService(intent);
     }
 
     @Override
@@ -164,5 +180,24 @@ public class FocusingActivity extends AppCompatActivity {
         super.onResume();
         // Todo: timer < threshold ? continue : break;
         Log.d("pengze", "YOU ARE FOCUSED");
+        Intent intent = new Intent();
+        intent.setAction(NotifyService.ACTION);
+        intent.putExtra(NotifyService.STOP_SERVICE_BROADCAST_KEY,
+                NotifyService.RQS_STOP_SERVICE);
+        sendBroadcast(intent);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        Intent intent = new Intent();
+        intent.setAction(NotifyService.ACTION);
+        intent.putExtra(NotifyService.STOP_SERVICE_BROADCAST_KEY,
+                NotifyService.RQS_STOP_SERVICE);
+        sendBroadcast(intent);
+
+        // TODO return Entry
+        Entry entry = new Entry();
     }
 }

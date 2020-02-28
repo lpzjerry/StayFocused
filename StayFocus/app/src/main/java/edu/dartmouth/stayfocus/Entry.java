@@ -2,7 +2,6 @@ package edu.dartmouth.stayfocus;
 
 public class Entry {
 
-
     private String startTime;
     private String endTime;
     private String duration;
