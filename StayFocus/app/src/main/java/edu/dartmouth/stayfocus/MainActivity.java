@@ -10,15 +10,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
@@ -40,9 +35,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import edu.dartmouth.stayfocus.Focus.SetTimerActivity;
+import edu.dartmouth.stayfocus.Focus.SetTimerDialog;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth firebaseAuth;
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity{
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_todo,  R.id.nav_record,
+                R.id.nav_todo, R.id.nav_record,
                 R.id.nav_settings, R.id.nav_share, R.id.nav_send)
                 .setDrawerLayout(drawer)
                 .build();
@@ -75,8 +70,8 @@ public class MainActivity extends AppCompatActivity{
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        Button buttonShare = (Button)findViewById(R.id.share_link);
-        Button buttonLogout = (Button)findViewById(R.id.logout);
+        Button buttonShare = (Button) findViewById(R.id.share_link);
+        Button buttonLogout = (Button) findViewById(R.id.logout);
         buttonShare.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
@@ -96,7 +91,7 @@ public class MainActivity extends AppCompatActivity{
                         new ResultCallback<Status>() {
                             @Override
                             public void onResult(Status status) {
-                                Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -111,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
         if (firebaseUser == null) {
             // Not logged in, launch the Log In activity
             loadLogInView();
-        } else{
+        } else {
 
             View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
             TextView email = headerView.findViewById(R.id.nav_user);
@@ -160,7 +155,7 @@ public class MainActivity extends AppCompatActivity{
                     new ResultCallback<Status>() {
                         @Override
                         public void onResult(Status status) {
-                            Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -179,9 +174,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void OnSetTimerClicked(View view) {
-        Intent intent = new Intent(this, SetTimerActivity.class);
-        startActivity(intent);
+        SetTimerDialog dlg = new SetTimerDialog();
+        dlg.show(getSupportFragmentManager(), "set timer dialog");
     }
-
-
 }

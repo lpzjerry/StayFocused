@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/setfocus"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.setfocus.SetFocusFragment">
+    android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -46,28 +46,15 @@
             android:text="minutes" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal"
-        android:weightSum="2">
+    <!--
         <Button
             android:id="@+id/button_set_focus_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ui_button_start"
+            android:layout_below="@+id/line1"
+            android:layout_marginTop="15dp"
+            android:layout_centerHorizontal="true"
             android:onClick="onClickSetFocusStart"
-            android:layout_weight="1"/>
-        <Button
-            android:id="@+id/button_set_focus_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ui_button_cancel"
-            android:onClick="onClickSetFocusCancel"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
+            android:text="@string/ui_button_start" />
+    -->
 </RelativeLayout>
