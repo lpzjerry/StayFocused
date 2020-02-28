@@ -63,18 +63,6 @@ public class RecordFragment extends Fragment {
             listView.setAdapter(adapter);
 
 
-            final EditText text = (EditText)  view.findViewById(R.id.todoText);
-            final Button button = (Button)  view.findViewById(R.id.addButton);
-
-            button.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Entry item = new Entry(text.getText().toString(), text.getText().toString(), "30min", "failed");
-
-                    helper.addEntry(item);
-                    text.setText("");
-                }
-            });
-
             // Use Firebase to populate the list.
             mDatabase.child("users").child(mUserId).child("items").addChildEventListener(new ChildEventListener() {
                 @Override
@@ -115,7 +103,7 @@ public class RecordFragment extends Fragment {
                 public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                                int position, long id) {
                     AlertDialog alertDialog = new AlertDialog.Builder(view.getContext()).create();
-                    alertDialog.setTitle(".....");
+                    alertDialog.setTitle("DELETE");
                     alertDialog.setMessage("Do you want to delete this record?");
                     alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancel",new DialogInterface.OnClickListener(){
 

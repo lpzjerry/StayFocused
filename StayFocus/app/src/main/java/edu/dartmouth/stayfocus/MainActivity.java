@@ -41,7 +41,7 @@ import android.widget.Toast;
 
 import edu.dartmouth.stayfocus.Focus.SetTimerActivity;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth firebaseAuth;
@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
+        
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -158,22 +157,4 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     }
 
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        Log.d("peixuan", "" + id);
-        switch (id) {
-            case R.id.nav_share:
-                Log.d("peixuan", "here");
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Stay Focus APP";
-                String shareSub = "https://home.cs.dartmouth.edu/~pengze/stayfocus/";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
-                startActivity(Intent.createChooser(myIntent, "Share using"));
-                return true;
-        }
-        return false;
-    }
 }
