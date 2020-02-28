@@ -1,8 +1,9 @@
-package edu.dartmouth.stayfocus.ui.slideshow;
+package edu.dartmouth.stayfocus.ui.record;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +40,7 @@ public class RecordFragment extends Fragment {
     private FirebaseUser mFirebaseUser;
     private DatabaseReference mDatabase;
     private String mUserId;
+    private FirebaseHelper helper;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class RecordFragment extends Fragment {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        helper = new FirebaseHelper();
 
         if (mFirebaseUser == null) {
 
@@ -67,7 +69,7 @@ public class RecordFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Entry item = new Entry(text.getText().toString(), text.getText().toString(), "30min", "failed");
-                    FirebaseHelper helper = new FirebaseHelper();
+
                     helper.addEntry(item);
                     text.setText("");
                 }
@@ -94,7 +96,6 @@ public class RecordFragment extends Fragment {
                 public void onChildRemoved(DataSnapshot dataSnapshot) {
 
 
-
                 }
 
                 @Override
@@ -108,13 +109,32 @@ public class RecordFragment extends Fragment {
                 }
             });
 
-            // Delete items when clicked
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    FirebaseHelper helper = new FirebaseHelper();
-                    helper.deleteEntry(position, listView);
-                    adapterData.remove(position);
-                    adapter.notifyDataSetChanged();
+
+            listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                               int position, long id) {
+                    AlertDialog alertDialog = new AlertDialog.Builder(view.getContext()).create();
+                    alertDialog.setTitle(".....");
+                    alertDialog.setMessage("Do you want to delete this record?");
+                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancel",new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    alertDialog.setButton(Dialog.BUTTON_POSITIVE,"delete",new DialogInterface.OnClickListener(){
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            helper.deleteEntry(position, listView);
+                            adapterData.remove(position);
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+                    alertDialog.show();
+                    return true;
                 }
             });
         }
@@ -158,5 +178,7 @@ public class RecordFragment extends Fragment {
             return v;
         }
     }
+
+
 
 }
