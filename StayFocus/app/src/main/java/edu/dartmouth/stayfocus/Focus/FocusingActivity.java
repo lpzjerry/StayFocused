@@ -23,6 +23,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.dhims.timerview.TimerTextView;
@@ -36,6 +40,7 @@ import edu.dartmouth.stayfocus.FirebaseHelper;
 import edu.dartmouth.stayfocus.R;
 
 import static java.lang.Math.ceil;
+import static java.lang.Math.min;
 import static java.lang.String.*;
 
 
@@ -43,12 +48,13 @@ public class FocusingActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "Timer";
     private int hour = 0, minute = 0, second = 0;
+    private int init_hour, init_minute;
     private long futureTimestamp;
     private long remainTimestamp;
     private String startTime, endTime, duration, success;
     public HomeWatcher mHomeWatcher;
 
-    ServiceConnection timerServiceConnection;
+    ServiceConnection timerServiceConnection = null;
     private boolean isBind = false;
     TimerHandler timerHandler;
     TextView timerTextView;
@@ -83,7 +89,9 @@ public class FocusingActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             hour = bundle.getInt("hour");
+            init_hour = hour;
             minute = bundle.getInt("minute");
+            init_minute = minute;
             second = bundle.getInt("second");
         }
 
@@ -97,21 +105,22 @@ public class FocusingActivity extends AppCompatActivity {
 
         appContext = (Application) this.getApplicationContext();
         timerHandler = new TimerHandler();
-        timerServiceConnection = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder service) {
-                Log.d(DEBUG_TAG, "onServiceConnected");
-                TimerService.MyBinder myBinder = (TimerService.MyBinder)service;
-                myBinder.getUIMsgHandler(timerHandler);
-            }
+        if (timerServiceConnection == null) {
+            timerServiceConnection = new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    Log.d(DEBUG_TAG, "onServiceConnected");
+                    TimerService.MyBinder myBinder = (TimerService.MyBinder) service;
+                    myBinder.getUIMsgHandler(timerHandler);
+                }
 
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
 
-            }
-        };
-        startAndBindService();
-
+                }
+            };
+            startAndBindService();
+        }
     }
 
 
@@ -225,7 +234,15 @@ public class FocusingActivity extends AppCompatActivity {
         //sendBroadcast(intent);
         appContext.stopService(intent);
 
-        Entry entry = new Entry();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        startTime = dateFormat.format(date);
+        if (init_hour == 0)
+            duration = init_minute + " min";
+        else
+            duration = init_hour + " hrs "+init_minute + " min";
+        Entry entry = new Entry(startTime, "", duration, "");
         new FirebaseHelper().addEntry(entry);
     }
 }

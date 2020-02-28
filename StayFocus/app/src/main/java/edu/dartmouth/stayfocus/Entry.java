@@ -1,5 +1,9 @@
 package edu.dartmouth.stayfocus;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Entry {
 
     private String startTime;
@@ -8,10 +12,12 @@ public class Entry {
     private String success;
 
     public Entry() {
-        startTime = "Feb 28 12:00";
-        endTime = "Feb 28 12:10";
-        duration = "10 min";
-        success = "Success";
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        startTime = dateFormat.format(date);
+        endTime = "";
+        duration = "1 min";
+        success = "";
     }
 
     public Entry(String startTime, String endTime, String duration, String success) {

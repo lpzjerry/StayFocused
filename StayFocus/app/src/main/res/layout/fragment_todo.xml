@@ -37,18 +37,8 @@
         android:layout_marginEnd="164dp"
         android:layout_marginBottom="36dp"
         android:src="@drawable/ic_access_alarm_black_24dp"
+        android:onClick="OnSetTimerClicked"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
-
-    <Button
-        android:id="@+id/button_set_focus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:onClick="OnSetTimerClicked"
-        android:text="@string/tmp_set_focus"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerview"
-        app:layout_constraintStart_toStartOf="@+id/recyclerview"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
