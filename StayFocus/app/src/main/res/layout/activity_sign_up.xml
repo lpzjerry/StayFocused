@@ -8,12 +8,14 @@
     android:paddingRight="16dp"
     android:paddingTop="32dp"
     android:paddingBottom="32dp"
+    android:background="@drawable/bg_login"
     tools:context=".SignUpActivity">
 
     <EditText
         android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
         android:hint="@string/email_hint"
         android:inputType="textEmailAddress" />
 
@@ -32,7 +34,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordField"
-        android:text="@string/sign_up_button_label"/>
+        android:text="@string/sign_up_button_label"
+        android:background="#df7861"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="20dp"
+        />
 
 
 </RelativeLayout>
