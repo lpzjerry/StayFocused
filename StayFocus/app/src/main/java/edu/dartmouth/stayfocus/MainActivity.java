@@ -44,7 +44,6 @@ import java.util.ArrayList;
 
 import edu.dartmouth.stayfocus.Focus.FocusTimeBean;
 import edu.dartmouth.stayfocus.Focus.FocusingActivity;
-import edu.dartmouth.stayfocus.Focus.SetTimerDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -174,8 +173,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void OnSetTimerClicked(View view) {
         pvOptions.show();
-        // SetTimerDialog dlg = new SetTimerDialog();
-        // dlg.show(getSupportFragmentManager(), "set timer dialog");
     }
 
     private void getOptionData() {
