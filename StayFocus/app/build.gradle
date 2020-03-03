@@ -45,6 +45,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.github.dhimant1990:TimerTextView:v1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+    // PickerView
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation 'com.contrarywind:wheelview:4.1.0'
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$rootProject.archLifecycleVersion"
@@ -52,7 +55,6 @@ dependencies {
     implementation "com.google.android.material:material:$rootProject.materialVersion"
     // Testing
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
-
 }
 
 apply plugin: 'com.google.gms.google-services'
