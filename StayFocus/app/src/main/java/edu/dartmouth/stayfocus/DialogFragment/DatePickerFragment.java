@@ -3,6 +3,7 @@ package edu.dartmouth.stayfocus.DialogFragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
@@ -14,10 +15,22 @@ import java.util.Date;
 import edu.dartmouth.stayfocus.R;
 import edu.dartmouth.stayfocus.TodoActivity;
 import edu.dartmouth.stayfocus.TodoEditActivity;
+import edu.dartmouth.stayfocus.ui.home.HomeFragment;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
     Calendar calendar = Calendar.getInstance();
+    private HomeFragment homeFragment;
+    private View customLayout;
+
+
+    public void setHomeFragment(HomeFragment homeFragment) {
+        this.homeFragment = homeFragment;
+    }
+
+    public void setCustomLayout(View customLayout){
+        this.customLayout = customLayout;
+    }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -25,10 +38,10 @@ public class DatePickerFragment extends DialogFragment
         date.setYear(year);
         date.setMonth(month);
         date.setDate(dayOfMonth);
-        ((TodoActivity)getActivity()).datePicked = date;
+        homeFragment.datePicker = date;
 
 
-        EditText editText = getActivity().findViewById(R.id.editDate);
+        EditText editText = customLayout.findViewById(R.id.editDate);
         editText.setText(year+"/"+(month+1)+"/"+dayOfMonth);
     }
 
