@@ -50,10 +50,11 @@ public class TodoEditActivity extends AppCompatActivity {
             checkBox1.setChecked(true);
         }
 
+
         Boolean isImportant = todo.isImportant();
         CheckBox checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
-        if(isImportant){
-            checkBox2.setChecked(true);
+        if(isImportant) {
+            checkBox2.setChecked(isImportant);
         }
 
         String notes = todo.getNotes();

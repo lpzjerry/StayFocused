@@ -1,17 +1,22 @@
 package edu.dartmouth.stayfocus.ui.home;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Date;
 import java.util.List;
 
+import edu.dartmouth.stayfocus.DialogFragment.DatePickerFragment;
 import edu.dartmouth.stayfocus.R;
 import edu.dartmouth.stayfocus.TodoActivity;
 import edu.dartmouth.stayfocus.TodoEditActivity;
@@ -36,6 +42,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     FloatingActionButton fab;
+    public Date datePicker;
 
     public static final int TODOACTIVITY_REQUEST_CODE = 1;
     public static final int TODOEDITACTIVITY_REQUEST_CODE = 2;
@@ -50,6 +57,9 @@ public class HomeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDeleteCallback(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.getAllTodoList().observe(getViewLifecycleOwner(), new Observer<List<Todo>>() {
             @Override
@@ -58,13 +68,13 @@ public class HomeFragment extends Fragment {
                 adapter.setTodoLists(todos);
             }
         });
+        adapter.setHomeViewModel(homeViewModel);
 
         fab = root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TodoActivity.class);
-                startActivityForResult(intent, TODOACTIVITY_REQUEST_CODE);
+                showInputDialog("Todo");
             }
         });
         return root;
@@ -93,5 +103,42 @@ public class HomeFragment extends Fragment {
                     Toast.LENGTH_LONG).show();
         }
 
+    }
+    public void showInputDialog(String title){
+        datePicker = null;
+        final View customLayout = getLayoutInflater().inflate(R.layout.activity_todo, null);
+        customLayout.findViewById(R.id.editDate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment datePickerFragment = new DatePickerFragment();
+                datePickerFragment.setHomeFragment(HomeFragment.this);
+                datePickerFragment.setCustomLayout(customLayout);
+                datePickerFragment.show(getParentFragmentManager(), "datePicker");
+            }
+        });
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(title)
+                .setView(customLayout)
+                .setPositiveButton("Start", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Todo mTodo = new Todo();
+                        EditText editTextTitle = (EditText)customLayout.findViewById(R.id.title);
+                        if(editTextTitle != null && !editTextTitle.getText().toString().isEmpty()){
+                            mTodo.setTitle(editTextTitle.getText().toString());
+                            mTodo.setDueDate(datePicker);
+                            Date createTime = new Date();
+                            mTodo.setCreateTime(createTime);
+                            homeViewModel.insert(mTodo);
+                        }else{
+                            Toast.makeText(
+                                    getActivity().getApplicationContext(),
+                                    R.string.empty_not_saved,
+                                    Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                })
+                .create();
+        alertDialog.show();
     }
 }

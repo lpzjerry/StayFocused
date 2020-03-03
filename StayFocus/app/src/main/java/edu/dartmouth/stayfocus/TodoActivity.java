@@ -1,33 +1,23 @@
 package edu.dartmouth.stayfocus;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.DialogFragment;
 
-import android.text.TextUtils;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import java.util.Date;
 
-import edu.dartmouth.stayfocus.DialogFragment.DatePickerFragment;
-import edu.dartmouth.stayfocus.DialogFragment.TimePickerFragment;
 import edu.dartmouth.stayfocus.room.Todo;
 
 public class TodoActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.example.android.todolistsql.REPLY";
 
-    public Date datePicked = null;
+   // public Date datePicked = null;
 
     private Todo todo;
 
@@ -42,7 +32,7 @@ public class TodoActivity extends AppCompatActivity {
 
 
 
-        findViewById(R.id.notes).setOnClickListener(new View.OnClickListener(){
+    /*    findViewById(R.id.notes).setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -52,7 +42,7 @@ public class TodoActivity extends AppCompatActivity {
 
         EditText editTextNotes = (EditText) findViewById(R.id.notes);
 
-        findViewById(R.id.BNRecordSave).setOnClickListener(new View.OnClickListener() {
+ /*       findViewById(R.id.BNRecordSave).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent replyIntent = new Intent();
@@ -71,10 +61,10 @@ public class TodoActivity extends AppCompatActivity {
                 }
                 finish();
             }
-        });
+        }); */
     }
 
-    public void showDatePickerDialog(View v){
+  /*  public void showDatePickerDialog(View v){
         DialogFragment dialogFragmentDate = new DatePickerFragment();
         dialogFragmentDate.show(getSupportFragmentManager(), "datePicker");
     }

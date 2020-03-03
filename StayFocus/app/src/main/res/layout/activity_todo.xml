@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TodoActivity">
+    android:id="@+id/alertDialog"
+    tools:context=".ui.home.HomeFragment">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,56 +33,8 @@
                 android:focusable="false"
                 android:clickable="true"
                 android:hint="Date"
-                android:onClick="showDatePickerDialog"
                 android:inputType="datetime" />
-
-
-            <EditText
-                android:id="@+id/editTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-                android:clickable="true"
-                android:hint="Time"
-                android:onClick="showTimePickerDialog"
-                android:inputType="datetime" />
-
-
-            <EditText
-                android:id="@+id/notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-                android:clickable="true"
-                android:hint="Notes"
-                android:inputType="text" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="bottom"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/BNRecordSave"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Save" />
-
-                <Button
-                    android:id="@+id/BNRecordCancel"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="onCancelButtonClicked"
-                    android:text="Cancel" />
-            </LinearLayout>
 
         </LinearLayout>
-    </ScrollView>
+</ScrollView>
 </LinearLayout>

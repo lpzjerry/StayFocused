@@ -33,6 +33,7 @@ public class HomeViewModel extends AndroidViewModel{
 
     public void delete(Todo todo){
         mRepository.delete(todo);
+        Log.d("debug555", "homeviewmodel delete called");
     }
 
     public void update(Todo todo){
