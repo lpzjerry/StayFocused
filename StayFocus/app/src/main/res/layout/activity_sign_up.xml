@@ -34,11 +34,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordField"
-        android:text="@string/sign_up_button_label"
-        android:background="#df7861"
-        android:textColor="#FFFFFF"
         android:layout_marginTop="20dp"
-        />
+        android:background="#df7861"
+        android:text="@string/sign_up_button_label"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#00FFFFFF"
+        android:textColorHint="#00FFFFFF" />
 
 
 </RelativeLayout>
