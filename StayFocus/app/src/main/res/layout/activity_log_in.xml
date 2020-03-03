@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp"
     android:paddingTop="32dp"
+    android:paddingRight="16dp"
     android:paddingBottom="32dp"
-    android:orientation="vertical"
-    tools:context=".LogInActivity"
-    android:background="@drawable/login_pic">
+    android:background="@drawable/bg_login"
+    tools:context=".LogInActivity">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stay Focused"
-        android:textSize="50dp"
-        android:textStyle="bold"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="50dp"
-        android:fontFamily="cursive" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/t"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text=""-->
+    <!--        android:textSize="50dp"-->
+    <!--        android:layout_marginBottom="20dp"/>-->
 
 
     <EditText
         android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:hint="@string/email_hint"
-        android:inputType="textEmailAddress"
-        android:layout_below="@+id/title"
-        android:layout_marginTop="35dp"
-        android:drawableLeft="@drawable/mail_icon"
-        android:drawableTint="@android:color/white"
-        android:drawablePadding="10dp"
-        android:textColor="@android:color/white" />
+        android:inputType="textEmailAddress" />
 
-
-    <EditText
-        android:id="@+id/passwordField"
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleLogInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/password_hint"
-        android:inputType="textPassword"
-        android:drawableLeft="@drawable/password_icon"
-        android:drawableTint="@android:color/white"
-        android:drawablePadding="10dp"
-        android:textColor="@android:color/white" />
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login_button_label" />
+        android:layout_below="@+id/signUpButton"
+        android:layout_marginTop="20dp"
+        android:elevation="1dp" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up_button_label" />
+        android:layout_below="@+id/loginButton"
+        android:layout_marginTop="20dp"
+        android:text="@string/sign_up_button_label"
+        android:background="#df7861"
+        android:textColor="#FFFFFF" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/googleLogInButton"
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordField"
+        android:layout_marginTop="20dp"
+        android:background="#df7861"
+        android:text="@string/login_button_label"
+        android:textColor="#FFFFFF" />
+
+    <EditText
+        android:id="@+id/passwordField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/emailField"
+        android:layout_marginTop="20dp"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword" />
+
+</RelativeLayout>

@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,15 +23,20 @@ import edu.dartmouth.stayfocus.room.Todo;
 public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoListViewHolder> {
     private HomeFragment context;
 
+    private HomeViewModel homeViewModel;
+
     class TodoListViewHolder extends RecyclerView.ViewHolder{
         private final TextView todoItemView1;
 
         private final TextView todoItemView2;
 
+        private final CheckBox checkBox;
+
         private TodoListViewHolder(View itemView){
             super(itemView);
             todoItemView1 = itemView.findViewById(R.id.textViewRecycle1);
             todoItemView2 = itemView.findViewById(R.id.textViewRecycle2);
+            checkBox = itemView.findViewById(R.id.checkBoxComplete);
         }
     }
 
@@ -40,6 +47,10 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
     TodoListAdapter(HomeFragment context){
         this.context = context;
         mInflater = LayoutInflater.from(context.getContext());
+    }
+
+    public void setHomeViewModel(HomeViewModel homeViewModel) {
+        this.homeViewModel = homeViewModel;
     }
 
     @Override
@@ -55,12 +66,22 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
             holder.todoItemView1.setText(current.getTitle());
             if(current.isCompleted()){
                 holder.todoItemView1.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+            }else{
+                holder.todoItemView1.setPaintFlags(0);
             }
             if(current.getDueDate() != null) {
                 holder.todoItemView2.setText(current.getDueDate().toString());
             }else{
                 holder.todoItemView2.setText("No Duedate Set");
             }
+            holder.checkBox.setChecked(current.isCompleted());
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    current.setCompleted(isChecked);
+                    homeViewModel.update(current);
+                }
+            });
         }else{
             holder.todoItemView1.setText("No TodoItem");
         }
@@ -88,5 +109,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
             return mTodoList.size();
         }
         else return 0;
+    }
+
+    public void deleteItem(int position){
+        Todo mTodo = mTodoList.get(position);
+        homeViewModel.delete(mTodo);
+        notifyItemRemoved(position);
+        Log.d("debug555", "deleteItem called");
     }
 }

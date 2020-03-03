@@ -8,11 +8,9 @@
     android:paddingRight="16dp"
     android:paddingTop="32dp"
     android:paddingBottom="32dp"
-    tools:context=".SignUpActivity"
+    android:background="@drawable/bg_login"
     android:orientation="vertical"
-    android:background="@drawable/login_pic">
-
-
+    tools:context=".SignUpActivity">
     <TextView
         android:id="@+id/signup_text"
         android:layout_width="match_parent"
@@ -28,8 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email_hint"
-        android:layout_below="@+id/signup_text"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="250dp"
         android:inputType="textEmailAddress"
         android:textColor="@android:color/white" />
 
@@ -38,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password_hint"
-        android:layout_below="@+id/emailField"
         android:inputType="textPassword"
         android:textColor="@android:color/white" />
 
@@ -47,8 +43,11 @@
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordField"
-        android:text="@string/sign_up_button_label" />
-
+        android:layout_marginTop="20dp"
+        android:background="#df7861"
+        android:text="@string/sign_up_button_label"
+        android:textColor="#FFFFFF"
+        android:textColorHighlight="#00FFFFFF"
+        android:textColorHint="#00FFFFFF" />
 
 </LinearLayout>

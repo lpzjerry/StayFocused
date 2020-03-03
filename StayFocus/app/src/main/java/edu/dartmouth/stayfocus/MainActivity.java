@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectChangeListener;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -32,10 +36,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import edu.dartmouth.stayfocus.Focus.SetTimerDialog;
+import java.util.ArrayList;
+
+import edu.dartmouth.stayfocus.Focus.FocusTimeBean;
+import edu.dartmouth.stayfocus.Focus.FocusingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     public GoogleApiClient googleApiClient;
+
+    // Time Picker
+    private OptionsPickerView pvOptions;
+    ArrayList<FocusTimeBean> options1Items = new ArrayList<>();
+    private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.VIBRATE}, 0);
         }
+
+        getOptionData();
+        initOptionPicker();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -144,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -156,7 +172,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OnSetTimerClicked(View view) {
-        SetTimerDialog dlg = new SetTimerDialog();
-        dlg.show(getSupportFragmentManager(), "set timer dialog");
+        pvOptions.show();
+    }
+
+    private void getOptionData() {
+        options1Items.add(new FocusTimeBean(0, "0", "hours", "others"));
+        options1Items.add(new FocusTimeBean(1, "1", "minutes", "others"));
+
+        ArrayList<String> options2Items_01 = new ArrayList<>();
+        options2Items_01.add("1");
+        options2Items_01.add("15");
+        options2Items_01.add("30");
+        options2Items_01.add("45");
+        ArrayList<String> options2Items_02 = new ArrayList<>();
+        options2Items_02.add("0");
+        options2Items_02.add("15");
+        options2Items_02.add("30");
+        options2Items.add(options2Items_01);
+        options2Items.add(options2Items_02);
+    }
+
+    private void initOptionPicker() {
+
+        pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                int hour = Integer.parseInt(options1Items.get(options1).getPickerViewText());
+                int minute = Integer.parseInt(options2Items.get(options1).get(options2));
+                Intent intent = new Intent(MainActivity.this, FocusingActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("hour", hour);
+                bundle.putInt("minute", minute);
+                bundle.putInt("second", 0);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        })
+                .setTitleText("Stay Focused")
+                .setSubmitText("Focus")
+                .build();
+        pvOptions.setSelectOptions(0, 0);
+        pvOptions.setPicker(options1Items, options2Items);
     }
 }

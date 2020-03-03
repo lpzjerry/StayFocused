@@ -42,6 +42,7 @@ public class TodoRepository {
     public void delete(Todo todo){
         TodoRoomDatabase.databaseWriteExecutor.execute(() ->{
             mTodoDao.delete(todo);
+            Log.d("debug555", "repository delete called");
         });
     }
 
