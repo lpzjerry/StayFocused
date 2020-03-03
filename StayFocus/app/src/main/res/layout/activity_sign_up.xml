@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,15 +8,30 @@
     android:paddingRight="16dp"
     android:paddingTop="32dp"
     android:paddingBottom="32dp"
-    tools:context=".SignUpActivity">
+    tools:context=".SignUpActivity"
+    android:orientation="vertical"
+    android:background="@drawable/login_pic">
+
+
+    <TextView
+        android:id="@+id/signup_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Let's Get Started"
+        android:layout_marginTop="90dp"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:fontFamily="cursive" />
 
     <EditText
         android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/email_hint"
-        android:inputType="textEmailAddress" />
-
+        android:layout_below="@+id/signup_text"
+        android:layout_marginTop="50dp"
+        android:inputType="textEmailAddress"
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/passwordField"
@@ -24,7 +39,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/password_hint"
         android:layout_below="@+id/emailField"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:textColor="@android:color/white" />
 
 
     <Button
@@ -32,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordField"
-        android:text="@string/sign_up_button_label"/>
+        android:text="@string/sign_up_button_label" />
 
 
-</RelativeLayout>
+</LinearLayout>

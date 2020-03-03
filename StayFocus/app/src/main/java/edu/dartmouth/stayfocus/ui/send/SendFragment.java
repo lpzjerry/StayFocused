@@ -1,5 +1,6 @@
 package edu.dartmouth.stayfocus.ui.send;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,7 @@ public class SendFragment extends Fragment {
         });
 
         Button button = (Button)root.findViewById(R.id.test_button);
+        Button feedbackButton = (Button)root.findViewById(R.id.feedback_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 rightNow = Calendar.getInstance();
@@ -47,6 +49,11 @@ public class SendFragment extends Fragment {
                 Entry item = new Entry(formattedDate,formattedDate, "30min", "failed");
                 FirebaseHelper helper = new FirebaseHelper();
                 helper.addEntry(item);
+
+            }
+        });
+        feedbackButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
             }
         });
