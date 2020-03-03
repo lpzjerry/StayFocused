@@ -33,9 +33,6 @@ public class FirebaseHelper {
 
     public void addEntry(Entry entry){
         database.child("users").child(userId).child("items").push().setValue(entry);
-//        database.child("users").child(userId).child("entries").child(String.valueOf(entry.getId())).child("id").setValue(entry.getId());
-//        database.child("users").child(userId).child("entries").child(String.valueOf(entry.getId())).child("title").setValue(entry.getTitle());
-
     }
 
     public void deleteEntry(int position, ListView listView){

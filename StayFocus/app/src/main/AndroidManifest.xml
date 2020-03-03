@@ -30,8 +30,12 @@
             android:name=".Focus.FocusingActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LogInActivity" />
+        <activity android:name=".SignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".LogInActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
