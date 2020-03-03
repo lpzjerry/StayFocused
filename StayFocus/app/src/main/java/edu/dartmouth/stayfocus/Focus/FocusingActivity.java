@@ -242,7 +242,10 @@ public class FocusingActivity extends AppCompatActivity {
             duration = init_minute + " min";
         else
             duration = init_hour + " hrs "+init_minute + " min";
-        Entry entry = new Entry(startTime, "", duration, "");
+        Entry entry = new Entry(startTime, "", duration, "success");
+        if (this.hour + this.minute > 0 || this.second > 1) {
+            entry.setSuccess("failed");
+        }
         new FirebaseHelper().addEntry(entry);
     }
 }
