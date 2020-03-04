@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordField"
         android:layout_marginTop="20dp"
-        android:background="#df7861"
+        android:background="@color/colorAccent"
         android:text="@string/login_button_label"
         android:textColor="#FFFFFF" />
 
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginButton"
         android:layout_marginTop="20dp"
-        android:background="#df7861"
+        android:background="@color/colorAccent"
         android:text="@string/sign_up_button_label"
         android:textColor="#FFFFFF" />
 

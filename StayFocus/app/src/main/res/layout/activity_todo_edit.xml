@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TodoEditActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginHorizontal="16dp"
+    android:theme="@style/AppTheme">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -16,15 +18,14 @@
             android:id="@+id/todoName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:text="Task Title"
-            android:textSize="50dp">
+            android:textSize="30dp"
+            android:textStyle="bold">
         </TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:text="Due date"
             android:textSize="20dp">
         </TextView>
@@ -33,18 +34,16 @@
             android:id="@+id/dueDateEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:ems="10"
             android:focusable="false"
             android:clickable="true"
-            android:hint="XXXX-XX-XX"
+            android:hint="YYYY-MM-DD"
             android:onClick="showDatePickerDialogEdit"
             android:inputType="datetime" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:text="Notes"
             android:textSize="20dp">
         </TextView>
