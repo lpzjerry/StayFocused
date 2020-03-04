@@ -28,7 +28,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
         android:hint="@string/email_hint"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:drawableLeft="@drawable/mail_icon"
+        android:drawableTint="#df7861"
+        android:drawablePadding="10dp"
+        android:textColor="#bb7861"/>
 
     <EditText
         android:id="@+id/passwordField"
@@ -37,7 +41,11 @@
         android:layout_below="@+id/emailField"
         android:layout_marginTop="20dp"
         android:hint="@string/password_hint"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:drawableLeft="@drawable/password_icon"
+        android:drawableTint="#df7861"
+        android:drawablePadding="10dp"
+        android:textColor="#bb7861"/>
 
     <Button
         android:id="@+id/loginButton"

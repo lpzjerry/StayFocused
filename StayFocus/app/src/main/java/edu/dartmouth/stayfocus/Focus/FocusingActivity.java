@@ -65,6 +65,12 @@ public class FocusingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(DEBUG_TAG, "onCreate called");
+        //kxx: add for UI
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
         // Hide the bottom bar with back button, home button and recent apps button.
         Window window = getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
