@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/countdowntimer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_to_2">
 
     <!--<com.dhims.timerview.TimerTextView
         android:id="@+id/timerText"
@@ -23,8 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:textSize="48sp"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="#6F3827"
+        android:textSize="48sp" />
 
 
 </RelativeLayout>

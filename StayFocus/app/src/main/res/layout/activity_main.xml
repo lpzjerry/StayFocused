@@ -15,10 +15,14 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="@drawable/side_nav_bg"
         android:fitsSystemWindows="true"
+        android:textAlignment="center"
+        app:itemIconTint="@color/colorBrown"
+        app:itemTextColor="@color/colorBrown"
         app:menu="@menu/activity_main_drawer">
 
         <LinearLayout
@@ -32,14 +36,21 @@
                 android:id="@+id/share_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Share"/>
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="Share"
+                android:textColor="@color/colorPrimary" />
 
             <Button
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/colorAccent"
                 android:gravity="center"
-                android:text="Log out" />
+                android:text="Log out"
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
     </com.google.android.material.navigation.NavigationView>

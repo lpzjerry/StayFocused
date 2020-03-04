@@ -11,20 +11,26 @@
         >
         <ImageView
             android:id="@+id/icon_res"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_margin="5dp"
             android:src="@drawable/failed"
+            android:tint="@color/colorGray"
             android:layout_gravity="center_vertical"/>
-
-
+        <!--Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
+        <!--Icons made by <a href="https://www.flaticon.com/authors/smartline" title="Smartline">Smartline</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
+        <!--Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
+        <!--Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
+            android:layout_marginLeft="16sp"
+
             android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_gravity="center_vertical"
-            android:textColor="@android:color/black"/>
+            android:textColor="@color/colorGray"/>
     </LinearLayout>
 
     <LinearLayout
@@ -33,9 +39,11 @@
         >
         <ImageView
             android:id="@+id/icon_calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_margin="5dp"
             android:src="@drawable/calendar"
+            android:tint="@color/colorGray"
             android:layout_gravity="center_vertical"/>
 
 
@@ -43,14 +51,11 @@
             android:id="@+id/record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:textSize="18sp"
+            android:layout_marginLeft="16sp"
+            android:textSize="14sp"
             android:layout_gravity="center_vertical"
-            android:textColor="@android:color/black"/>
+            android:textColor="@color/colorGray"/>
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>
