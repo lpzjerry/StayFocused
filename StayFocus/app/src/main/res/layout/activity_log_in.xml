@@ -45,7 +45,7 @@
         android:drawableLeft="@drawable/password_icon"
         android:drawableTint="#df7861"
         android:drawablePadding="10dp"
-        android:textColor="#bb7861"/>
+        android:textColor="@color/colorBrown"/>
 
     <Button
         android:id="@+id/loginButton"
