@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -254,9 +256,14 @@ public class FocusingActivity extends AppCompatActivity {
 
     private void showResult() {
         // TODO share
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle("Congratulations!");
-        alertDialog.setMessage("You stayed focused for "+duration);
+        View dialog_view = getLayoutInflater().inflate(R.layout.dialog_focus_result, null);
+        AlertDialog alertDialog = new AlertDialog.Builder(this,R.style.DialogTheme)
+                .setView(dialog_view)
+                .create();
+        TextView resultMessage = dialog_view.findViewById(R.id.tvFocusResult);
+        //alertDialog.setMessage("You stayed focused for " + duration);
+        resultMessage.setText("You stayed focused for " + duration);
+
         alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancel",new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -277,6 +284,7 @@ public class FocusingActivity extends AppCompatActivity {
                 FocusingActivity.this.finish();
             }
         });
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();
     }
 }

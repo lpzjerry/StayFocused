@@ -43,4 +43,5 @@
     <string name="ui_button_start">Start</string>
     <string name="ui_button_interrupt">Interrupt</string>
     <string name="ui_button_terminate">Terminate</string>
+    <string name="congratulations">Congratulations!</string>
 </resources>
