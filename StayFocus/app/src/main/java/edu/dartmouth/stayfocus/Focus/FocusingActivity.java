@@ -1,15 +1,14 @@
 package edu.dartmouth.stayfocus.Focus;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
+
 import android.app.ActivityManager;
 import android.app.Application;
-import android.app.KeyguardManager;
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.ComponentName;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -20,26 +19,18 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.dhims.timerview.TimerTextView;
-
-import org.w3c.dom.Text;
-
-import java.util.concurrent.TimeUnit;
-
 import edu.dartmouth.stayfocus.Entry;
 import edu.dartmouth.stayfocus.FirebaseHelper;
+import edu.dartmouth.stayfocus.MainActivity;
 import edu.dartmouth.stayfocus.R;
 
-import static java.lang.Math.ceil;
 import static java.lang.Math.min;
 import static java.lang.String.*;
 
@@ -101,6 +92,10 @@ public class FocusingActivity extends AppCompatActivity {
             init_minute = minute;
             second = bundle.getInt("second");
         }
+        if (init_hour == 0)
+            duration = init_minute + " min";
+        else
+            duration = init_hour + " hrs "+init_minute + " min";
 
         futureTimestamp = System.currentTimeMillis() + (hour * 60 * 60 * 1000)
                + (minute * 60 * 1000) + (second * 1000);
@@ -164,10 +159,11 @@ public class FocusingActivity extends AppCompatActivity {
                 timerTextView.setText(format("%02d:%02d:%02d", hours, minutes, seconds));
                 if (hours <= 0 && minutes <= 0 && seconds <= 0) {
                     finished = true;
-                    FocusingActivity.this.finish();
                     unBindService();
                     Intent intent = new Intent(FocusingActivity.this.getApplicationContext(), TimerService.class);
                     stopService(intent);
+                    showResult();
+                    // FocusingActivity.this.finish();
                 }
             }
         }
@@ -191,7 +187,11 @@ public class FocusingActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {} // DO NOTHING
+    public void onBackPressed() {
+        if (finished) {
+            this.finish();
+        }
+    } // DO NOTHING
 
     private void distracted() {
         // Todo: pause_timer.start();
@@ -242,18 +242,41 @@ public class FocusingActivity extends AppCompatActivity {
         //sendBroadcast(intent);
         appContext.stopService(intent);
 
-
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         startTime = dateFormat.format(date);
-        if (init_hour == 0)
-            duration = init_minute + " min";
-        else
-            duration = init_hour + " hrs "+init_minute + " min";
         Entry entry = new Entry(startTime, "", duration, "success");
         if (!finished) {
             entry.setSuccess("failed");
         }
         new FirebaseHelper().addEntry(entry);
+    }
+
+    private void showResult() {
+        // TODO share
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle("Congratulations!");
+        alertDialog.setMessage("You stayed focused for "+duration);
+        alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancel",new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FocusingActivity.this.finish();
+            }
+        });
+        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Share",new DialogInterface.OnClickListener(){
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = "Stay Focus APP";
+                String shareSub = "https://home.cs.dartmouth.edu/~pengze/stayfocus/";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
+                startActivity(Intent.createChooser(myIntent, "Share using"));
+                FocusingActivity.this.finish();
+            }
+        });
+        alertDialog.show();
     }
 }
