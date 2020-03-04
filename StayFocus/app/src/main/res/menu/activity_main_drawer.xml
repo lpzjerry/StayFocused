@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="navigation_view"
+    >
 
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_todo"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/todo_icon"
             android:title="@string/menu_todo" />
+        <!--icon made by: https://freeicons.io/interior-design/list-todo%20list-icon-1268#-->
         <item
             android:id="@+id/nav_record"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/record_icon"
             android:title="@string/menu_record" />
+        <!--icon made by: https://freeicons.io/bullets-and-check-icons/check-ok-yes-tick-icon-2921#-->
 
     </group>
 
