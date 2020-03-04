@@ -38,6 +38,7 @@ import edu.dartmouth.stayfocus.room.Todo;
 
 import static android.app.Activity.RESULT_OK;
 import static edu.dartmouth.stayfocus.R.*;
+import static edu.dartmouth.stayfocus.R.color.colorPrimary;
 import static edu.dartmouth.stayfocus.TodoActivity.EXTRA_REPLY;
 
 public class HomeFragment extends Fragment {
@@ -124,7 +125,7 @@ public class HomeFragment extends Fragment {
             }
         });
         //AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(title)
-        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext(),R.style.DialogTheme)
                 .setView(customLayout)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -150,15 +151,18 @@ public class HomeFragment extends Fragment {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();
 
+
+        //OK button style
         final Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
         positiveButton.setBackgroundResource(R.drawable.dialog_bn_bg);
         positiveButton.setGravity(Gravity.CENTER);
-        //positiveButton.setTextColor("#fcf8e8");
+        positiveButton.setTextColor(getResources().getColor(colorPrimary));
         LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
         positiveButtonLL.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         positiveButtonLL.weight = 1;
         positiveButtonLL.leftMargin = 300;
         positiveButtonLL.rightMargin = 500;
+        positiveButtonLL.topMargin = 100;
         positiveButtonLL.gravity = Gravity.CENTER_HORIZONTAL;
         positiveButton.setLayoutParams(positiveButtonLL);
 
