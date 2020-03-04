@@ -17,25 +17,5 @@
         android:label="@string/menu_record"
         tools:layout="@layout/fragment_record" />
 
-    <fragment
-        android:id="@+id/nav_settings"
-        android:name="edu.dartmouth.stayfocus.ui.tools.ToolsFragment"
-        android:label="@string/menu_settings"
-        tools:layout="@layout/fragment_settings" />
-
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="edu.dartmouth.stayfocus.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="edu.dartmouth.stayfocus.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
-
-
 
 </navigation>

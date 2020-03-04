@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:drawableTint">@color/colorGray</item>
 
     </style>
 
@@ -20,17 +21,17 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
+        <item name="android:drawableTint">@color/colorGray</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColor">#bb7861</item>
-        <item name="android:drawableTint">#bb7861</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:drawableTint">@color/colorGray</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
-        <item name="android:textColor">#bb7861</item>
-        <item name="android:drawableTint">#bb7861</item>
+        <item name="android:textColor">@color/colorGray</item>
+        <item name="android:drawableTint">@color/colorGray</item>
 
     </style>
 
@@ -38,7 +39,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:paddingLeft">8dp</item>
-        <item name="android:background"></item>
+        <item name="android:drawableTint">@color/colorGray</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Large</item>
     </style>
 

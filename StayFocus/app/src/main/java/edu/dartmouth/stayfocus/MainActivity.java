@@ -3,6 +3,7 @@ package edu.dartmouth.stayfocus;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -78,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_todo, R.id.nav_record,
-                R.id.nav_settings, R.id.nav_share, R.id.nav_send)
+                R.id.nav_todo, R.id.nav_record)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
