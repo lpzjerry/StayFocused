@@ -36,7 +36,7 @@
                 android:id="@+id/share_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#df7861"
+                android:background="@color/colorAccent"
                 android:gravity="center"
                 android:text="Share"
                 android:textColor="@color/colorPrimary" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:background="#df7861"
+                android:background="@color/colorAccent"
                 android:gravity="center"
                 android:text="Log out"
                 android:textColor="@color/colorPrimary" />
