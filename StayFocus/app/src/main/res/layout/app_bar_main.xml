@@ -12,20 +12,21 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_anchor="@+id/appBarLayout"
+            app:layout_anchorGravity="center"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:titleTextColor="#bb7861" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:layout_anchor="@+id/appBarLayout"
-        app:layout_anchorGravity="center"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextColor="#bb7861" />
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
