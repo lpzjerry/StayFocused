@@ -4,37 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
     android:orientation="vertical"
     android:id="@+id/alertDialog"
+    android:background="@drawable/dialog_shape"
     tools:context=".ui.home.HomeFragment">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Task Title"
+        android:inputType="text"
+        android:singleLine="true"/>
 
-            <EditText
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Add Task"
-                android:inputType="text"
-                android:singleLine="true"/>
+    <EditText
+        android:id="@+id/editDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:focusable="false"
+        android:clickable="true"
+        android:hint="Due Date"
+        android:inputType="datetime" />
 
-            <EditText
-                android:id="@+id/editDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:focusable="false"
-                android:clickable="true"
-                android:hint="Date"
-                android:inputType="datetime" />
 
-        </LinearLayout>
-</ScrollView>
 </LinearLayout>

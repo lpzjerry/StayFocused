@@ -2,12 +2,17 @@ package edu.dartmouth.stayfocus.ui.home;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +37,7 @@ import edu.dartmouth.stayfocus.TodoEditActivity;
 import edu.dartmouth.stayfocus.room.Todo;
 
 import static android.app.Activity.RESULT_OK;
+import static edu.dartmouth.stayfocus.R.*;
 import static edu.dartmouth.stayfocus.TodoActivity.EXTRA_REPLY;
 
 public class HomeFragment extends Fragment {
@@ -50,9 +56,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_todo, container, false);
+        View root = inflater.inflate(layout.fragment_todo, container, false);
 
-        RecyclerView recyclerView = root.findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = root.findViewById(id.recyclerview);
         final TodoListAdapter adapter = new TodoListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -70,7 +76,7 @@ public class HomeFragment extends Fragment {
         });
         adapter.setHomeViewModel(homeViewModel);
 
-        fab = root.findViewById(R.id.fab);
+        fab = root.findViewById(id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,15 +105,16 @@ public class HomeFragment extends Fragment {
         }else{
             Toast.makeText(
                     getActivity().getApplicationContext(),
-                    R.string.empty_not_saved,
+                    string.empty_not_saved,
                     Toast.LENGTH_LONG).show();
         }
 
     }
     public void showInputDialog(String title){
         datePicker = null;
-        final View customLayout = getLayoutInflater().inflate(R.layout.activity_todo, null);
-        customLayout.findViewById(R.id.editDate).setOnClickListener(new View.OnClickListener() {
+        final View customLayout = getLayoutInflater().inflate(layout.activity_todo, null);
+
+        customLayout.findViewById(id.editDate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerFragment datePickerFragment = new DatePickerFragment();
@@ -116,13 +123,14 @@ public class HomeFragment extends Fragment {
                 datePickerFragment.show(getParentFragmentManager(), "datePicker");
             }
         });
-        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(title)
+        //AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(title)
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
                 .setView(customLayout)
-                .setPositiveButton("Start", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Todo mTodo = new Todo();
-                        EditText editTextTitle = (EditText)customLayout.findViewById(R.id.title);
+                        EditText editTextTitle = (EditText)customLayout.findViewById(id.title);
                         if(editTextTitle != null && !editTextTitle.getText().toString().isEmpty()){
                             mTodo.setTitle(editTextTitle.getText().toString());
                             mTodo.setDueDate(datePicker);
@@ -132,13 +140,28 @@ public class HomeFragment extends Fragment {
                         }else{
                             Toast.makeText(
                                     getActivity().getApplicationContext(),
-                                    R.string.empty_not_saved,
+                                    string.empty_not_saved,
                                     Toast.LENGTH_LONG).show();
                         }
 
                     }
                 })
                 .create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();
+
+        final Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positiveButton.setBackgroundResource(R.drawable.dialog_bn_bg);
+        positiveButton.setGravity(Gravity.CENTER);
+        //positiveButton.setTextColor("#fcf8e8");
+        LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
+        positiveButtonLL.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        positiveButtonLL.weight = 1;
+        positiveButtonLL.leftMargin = 300;
+        positiveButtonLL.rightMargin = 500;
+        positiveButtonLL.gravity = Gravity.CENTER_HORIZONTAL;
+        positiveButton.setLayoutParams(positiveButtonLL);
+
+
     }
 }
