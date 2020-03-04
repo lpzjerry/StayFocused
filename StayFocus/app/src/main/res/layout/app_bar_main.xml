@@ -9,22 +9,17 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:collapseIcon="@drawable/menu_icon"
             app:layout_anchor="@+id/appBarLayout"
             app:layout_anchorGravity="center"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
             app:titleTextColor="#bb7861"
-
             />
-        <!--Icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
 
     </com.google.android.material.appbar.AppBarLayout>
 
