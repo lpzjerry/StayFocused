@@ -52,6 +52,7 @@ public class FocusingActivity extends AppCompatActivity {
     private long futureTimestamp;
     private long remainTimestamp;
     private String startTime, endTime, duration, success;
+    private boolean finished = false;
     public HomeWatcher mHomeWatcher;
 
     ServiceConnection timerServiceConnection = null;
@@ -156,6 +157,7 @@ public class FocusingActivity extends AppCompatActivity {
                 // Toast.makeText(getApplicationContext(),hours + "h " + minutes + "min " + seconds +"s" , Toast.LENGTH_SHORT).show();
                 timerTextView.setText(format("%02d:%02d:%02d", hours, minutes, seconds));
                 if (hours <= 0 && minutes <= 0 && seconds <= 0) {
+                    finished = true;
                     FocusingActivity.this.finish();
                     unBindService();
                     Intent intent = new Intent(FocusingActivity.this.getApplicationContext(), TimerService.class);
@@ -243,7 +245,7 @@ public class FocusingActivity extends AppCompatActivity {
         else
             duration = init_hour + " hrs "+init_minute + " min";
         Entry entry = new Entry(startTime, "", duration, "success");
-        if (this.hour + this.minute > 0 || this.second > 1) {
+        if (!finished) {
             entry.setSuccess("failed");
         }
         new FirebaseHelper().addEntry(entry);
