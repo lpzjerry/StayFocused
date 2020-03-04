@@ -28,6 +28,7 @@
         android:layout_margin="16dp"
         android:layout_marginEnd="164dp"
         android:src="@drawable/ic_add_black_24dp"
+        android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerview"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -39,6 +40,7 @@
         android:layout_marginEnd="164dp"
         android:layout_marginBottom="36dp"
         android:src="@drawable/ic_access_alarm_black_24dp"
+        android:tint="@color/colorPrimary"
         android:onClick="OnSetTimerClicked"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>

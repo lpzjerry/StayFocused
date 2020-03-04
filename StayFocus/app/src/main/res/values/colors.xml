@@ -6,4 +6,5 @@
     <color name="colorBlack">#df7861</color>
     <!-- reference: https://colorhunt.co/palette/171304 -->
     <color name="colorBrown">#b7472a</color>
+    <color name="colorGray">#bb7861</color>
 </resources>
