@@ -8,6 +8,8 @@
     tools:context=".TodoEditActivity"
     android:orientation="vertical"
     android:layout_marginHorizontal="16dp"
+    android:background="@drawable/dialog_shape"
+    android:layout_margin="16dp"
     android:theme="@style/AppTheme">
     <LinearLayout
         android:layout_width="fill_parent"
@@ -18,8 +20,11 @@
             android:id="@+id/todoName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="16dp"
             android:text="Task Title"
             android:textSize="30dp"
+            android:textColor="@color/colorGray"
             android:textStyle="bold">
         </TextView>
 
@@ -27,7 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Due date"
-            android:textSize="20dp">
+            android:textSize="20dp"
+            android:textColor="@color/colorGray">
         </TextView>
 
         <EditText
@@ -38,60 +44,75 @@
             android:focusable="false"
             android:clickable="true"
             android:hint="YYYY-MM-DD"
+            android:textColor="@color/colorGray"
+            android:backgroundTint="@color/colorAccent"
             android:onClick="showDatePickerDialogEdit"
-            android:inputType="datetime" />
+            android:inputType="datetime"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Notes"
-            android:textSize="20dp">
+            android:textSize="20dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/colorGray">
         </TextView>
 
         <EditText
             android:id="@+id/notesEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:ems="10"
-            android:hint="Notes"
-            android:inputType="text" />
+            android:hint="Add some notes"
+            android:textColor="@color/colorGray"
+            android:backgroundTint="@color/colorAccent"
+            android:inputType="text"/>
 
 
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Has Completed" />
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Is Important" />
+<!--        <CheckBox-->
+<!--            android:id="@+id/checkBox1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Has Completed" />-->
+<!--        <CheckBox-->
+<!--            android:id="@+id/checkBox2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Is Important" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:layout_margin="5dp">
 
             <Button
                 android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@android:drawable/ic_menu_save"
+                android:drawableTint="@color/colorPrimary"
                 android:onClick="onSave"
-                android:text="Save" >
-            </Button>
+                android:text="Save"
+                android:textColor="@color/colorPrimary"></Button>
 
             <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="30dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/colorAccent"
+                android:drawableLeft="@android:drawable/ic_menu_delete"
+                android:drawableTint="@color/colorPrimary"
                 android:onClick="onDelete"
-                android:text="Delete" >
-            </Button>
+                android:text="Delete"
+                android:textColor="@color/colorPrimary"></Button>
         </LinearLayout>
     </LinearLayout>
 

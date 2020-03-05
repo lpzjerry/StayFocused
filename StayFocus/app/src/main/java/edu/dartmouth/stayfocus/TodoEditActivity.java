@@ -44,7 +44,7 @@ public class TodoEditActivity extends AppCompatActivity {
         }
 
 
-        Boolean isCompleted = todo.isCompleted();
+        /*Boolean isCompleted = todo.isCompleted();
         CheckBox checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
         if(isCompleted){
             checkBox1.setChecked(true);
@@ -55,7 +55,7 @@ public class TodoEditActivity extends AppCompatActivity {
         CheckBox checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
         if(isImportant) {
             checkBox2.setChecked(isImportant);
-        }
+        }*/
 
         String notes = todo.getNotes();
         EditText editTextNotes = findViewById(R.id.notesEdit);
@@ -74,13 +74,13 @@ public class TodoEditActivity extends AppCompatActivity {
         todo.setNotes(editTextNotes.getText().toString());
         Log.d("debug555", editTextNotes.getText().toString()+"");
 
-        CheckBox checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
+        /*CheckBox checkBox1 = (CheckBox) findViewById(R.id.checkBox1);
         Boolean isCompleted = checkBox1.isChecked();
         todo.setCompleted(isCompleted);
 
         CheckBox checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
         Boolean isImportant = checkBox2.isChecked();
-        todo.setImportant(isImportant);
+        todo.setImportant(isImportant);*/
 
         Date updateTime = new Date();
         todo.setUpdateTime(updateTime);
