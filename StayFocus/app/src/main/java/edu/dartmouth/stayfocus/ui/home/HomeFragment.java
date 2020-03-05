@@ -1,5 +1,6 @@
 package edu.dartmouth.stayfocus.ui.home;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -159,5 +160,14 @@ public class HomeFragment extends Fragment {
 
 
 
+    }
+    public Activity getActivity(Fragment fragment) {
+        if (fragment == null) {
+            return null;
+        }
+        while (fragment.getParentFragment() != null) {
+            fragment = fragment.getParentFragment();
+        }
+        return fragment.getActivity();
     }
 }
