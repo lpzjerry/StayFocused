@@ -15,7 +15,8 @@
             android:enabled="true"
             android:exported="true"></service>
 
-        <activity android:name=".TodoEditActivity" />
+        <activity android:name=".TodoEditActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TodoActivity"
             android:label="@string/title_activity_todo"
@@ -39,7 +40,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -53,6 +54,7 @@
 
         <meta-data
             android:name="preloaded_fonts"
+            android:screenOrientation="portrait"
             android:resource="@array/preloaded_fonts" />
     </application>
 
