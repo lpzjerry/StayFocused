@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ import edu.dartmouth.stayfocus.room.Todo;
 
 import static android.app.Activity.RESULT_OK;
 import static edu.dartmouth.stayfocus.R.*;
+import static edu.dartmouth.stayfocus.R.color.colorPrimary;
 import static edu.dartmouth.stayfocus.TodoActivity.EXTRA_REPLY;
 
 public class HomeFragment extends Fragment {
@@ -123,44 +125,38 @@ public class HomeFragment extends Fragment {
                 datePickerFragment.show(getParentFragmentManager(), "datePicker");
             }
         });
-        //AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(title)
-        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext(),R.style.DialogTheme)
                 .setView(customLayout)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Todo mTodo = new Todo();
-                        EditText editTextTitle = (EditText)customLayout.findViewById(id.title);
-                        if(editTextTitle != null && !editTextTitle.getText().toString().isEmpty()){
-                            mTodo.setTitle(editTextTitle.getText().toString());
-                            mTodo.setDueDate(datePicker);
-                            Date createTime = new Date();
-                            mTodo.setCreateTime(createTime);
-                            homeViewModel.insert(mTodo);
-                        }else{
-                            Toast.makeText(
-                                    getActivity().getApplicationContext(),
-                                    string.empty_not_saved,
-                                    Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-                })
                 .create();
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.show();
 
-        final Button positiveButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        positiveButton.setBackgroundResource(R.drawable.dialog_bn_bg);
-        positiveButton.setGravity(Gravity.CENTER);
-        //positiveButton.setTextColor("#fcf8e8");
-        LinearLayout.LayoutParams positiveButtonLL = (LinearLayout.LayoutParams) positiveButton.getLayoutParams();
-        positiveButtonLL.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-        positiveButtonLL.weight = 1;
-        positiveButtonLL.leftMargin = 300;
-        positiveButtonLL.rightMargin = 500;
-        positiveButtonLL.gravity = Gravity.CENTER_HORIZONTAL;
-        positiveButton.setLayoutParams(positiveButtonLL);
+
+        TextView okButton = customLayout.findViewById(id.bnTodoOk);
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Todo mTodo = new Todo();
+                    EditText editTextTitle = (EditText)customLayout.findViewById(id.title);
+                    if(editTextTitle != null && !editTextTitle.getText().toString().isEmpty()){
+                        mTodo.setTitle(editTextTitle.getText().toString());
+                        mTodo.setDueDate(datePicker);
+                        Date createTime = new Date();
+                        mTodo.setCreateTime(createTime);
+                        homeViewModel.insert(mTodo);
+                    }else{
+                        Toast.makeText(
+                                getActivity().getApplicationContext(),
+                                string.empty_not_saved,
+                                Toast.LENGTH_LONG).show();
+                    }
+                    alertDialog.dismiss();
+
+            }
+        });
+        //AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(title)
+
+
 
 
     }

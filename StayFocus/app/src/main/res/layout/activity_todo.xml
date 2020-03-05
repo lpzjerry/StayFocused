@@ -29,5 +29,15 @@
         android:hint="Due Date"
         android:inputType="datetime" />
 
+    <TextView
+        android:id="@+id/bnTodoOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:text="@android:string/ok"
+        android:textColor="@color/colorGray"
+        android:textStyle="bold" />
+
 
 </LinearLayout>

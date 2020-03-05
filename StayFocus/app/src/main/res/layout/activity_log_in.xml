@@ -13,26 +13,18 @@
     android:background="@drawable/bg_login_new"
     tools:context=".LogInActivity">
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/t"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:text=""-->
-    <!--        android:textSize="50dp"-->
-    <!--        android:layout_marginBottom="20dp"/>-->
-
-
     <EditText
         android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
-        android:hint="@string/email_hint"
+        android:hint="@string/login_email"
         android:inputType="textEmailAddress"
-        android:drawableLeft="@drawable/mail_icon"
+        android:drawableLeft="@drawable/email"
         android:drawableTint="#df7861"
         android:drawablePadding="10dp"
         android:textColor="#bb7861"/>
+    <!--Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
 
     <EditText
         android:id="@+id/passwordField"
@@ -40,12 +32,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/emailField"
         android:layout_marginTop="20dp"
-        android:hint="@string/password_hint"
+        android:hint="@string/login_password"
         android:inputType="textPassword"
-        android:drawableLeft="@drawable/password_icon"
+        android:drawableLeft="@drawable/lock"
+
         android:drawableTint="#df7861"
         android:drawablePadding="10dp"
         android:textColor="@color/colorBrown"/>
+    <!--Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>-->
 
     <Button
         android:id="@+id/loginButton"

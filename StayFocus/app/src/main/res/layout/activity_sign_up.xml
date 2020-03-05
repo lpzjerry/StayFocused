@@ -19,7 +19,7 @@
         android:hint="@string/email_hint"
         android:layout_marginTop="350dp"
         android:inputType="textEmailAddress"
-        android:drawableLeft="@drawable/mail_icon"
+        android:drawableLeft="@drawable/email"
         android:drawableTint="#df7861"
         android:drawablePadding="10dp"
         android:textColor="#bb7861"/>
@@ -28,9 +28,10 @@
         android:id="@+id/passwordField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="@string/password_hint"
         android:inputType="textPassword"
-        android:drawableLeft="@drawable/password_icon"
+        android:drawableLeft="@drawable/lock"
         android:drawableTint="#df7861"
         android:drawablePadding="10dp"
         android:textColor="#bb7861"/>

@@ -1,8 +1,11 @@
 package edu.dartmouth.stayfocus;
 
 import android.Manifest;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
@@ -18,6 +21,7 @@ import com.google.android.gms.common.api.Status;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
@@ -37,6 +41,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,22 +83,21 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_todo, R.id.nav_record,
-                R.id.nav_settings, R.id.nav_share, R.id.nav_send)
+                R.id.nav_todo, R.id.nav_record)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        Button buttonShare = (Button) findViewById(R.id.share_link);
+        ImageButton buttonShare = (ImageButton) findViewById(R.id.share_link);
         Button buttonLogout = (Button) findViewById(R.id.logout);
         buttonShare.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String shareBody = "Stay Focus APP";
-                String shareSub = "https://home.cs.dartmouth.edu/~pengze/stayfocus/";
+                String shareBody = "StayFocused! APP";
+                String shareSub = "I just found this amazing app that can help you study efficiently! Come on and check it out! \n StayFocused!: https://home.cs.dartmouth.edu/~pengze/stayfocused/";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
                 startActivity(Intent.createChooser(myIntent, "Share using"));
