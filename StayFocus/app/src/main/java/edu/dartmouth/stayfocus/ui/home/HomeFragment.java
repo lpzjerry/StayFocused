@@ -91,6 +91,8 @@ public class HomeFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
+        //Add new todoitem was done by new activity at first, the first if condition holds this situation
+        //Now add todoitem is done through showInputDialog, the first if condition is useless here but the code remains
         if(requestCode == TODOACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
             Todo todo = (Todo)data.getSerializableExtra(EXTRA_REPLY);
             homeViewModel.insert(todo);
