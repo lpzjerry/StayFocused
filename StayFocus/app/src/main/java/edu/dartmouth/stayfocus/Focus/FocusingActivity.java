@@ -18,9 +18,11 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -165,7 +167,7 @@ public class FocusingActivity extends AppCompatActivity {
                     Intent intent = new Intent(FocusingActivity.this.getApplicationContext(), TimerService.class);
                     stopService(intent);
                     showResult();
-                    // FocusingActivity.this.finish();
+                    //FocusingActivity.this.finish();
                 }
             }
         }
@@ -261,10 +263,24 @@ public class FocusingActivity extends AppCompatActivity {
                 .setView(dialog_view)
                 .create();
         TextView resultMessage = dialog_view.findViewById(R.id.tvFocusResult);
+        ImageView shareButton = dialog_view.findViewById(R.id.ivDialogResult);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareBody = "StayFocused! APP";
+                String shareSub = "I have focused for " + duration + " in StayFocused!. Come on and check out this amazing app! \n https://home.cs.dartmouth.edu/~pengze/stayfocused/";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
+                startActivity(Intent.createChooser(myIntent, "Share using"));
+                //FocusingActivity.this.finish();
+            }
+        });
         //alertDialog.setMessage("You stayed focused for " + duration);
         resultMessage.setText("You stayed focused for " + duration);
 
-        alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancel",new DialogInterface.OnClickListener(){
+        /*alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cool",new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 FocusingActivity.this.finish();
@@ -283,8 +299,17 @@ public class FocusingActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(myIntent, "Share using"));
                 FocusingActivity.this.finish();
             }
-        });
+        });*/
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                FocusingActivity.this.finish();
+            }
+        });
         alertDialog.show();
+
+
     }
+
 }

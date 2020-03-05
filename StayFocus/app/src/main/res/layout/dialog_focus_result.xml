@@ -2,20 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="30dp"
-    android:orientation="vertical"
     android:id="@+id/alertDialog"
-    android:background="@drawable/dialog_shape">
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_shape"
+    android:layout_marginHorizontal="40dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
 
 
     <TextView
         android:id="@+id/tvCongrats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="@string/congratulations"
-        android:textColor="@color/colorBlack"
+        android:textColor="@color/colorGray"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -23,5 +25,16 @@
         android:id="@+id/tvFocusResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorBlack" />
+        android:text="text"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/colorGray" />
+
+    <ImageView
+        android:id="@+id/ivDialogResult"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="right"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_menu_share" />
+
 </LinearLayout>
