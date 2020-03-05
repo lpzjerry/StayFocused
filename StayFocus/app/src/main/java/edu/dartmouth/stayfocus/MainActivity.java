@@ -192,18 +192,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getOptionData() {
-        options1Items.add(new FocusTimeBean(0, "0", "hours", "others"));
-        options1Items.add(new FocusTimeBean(1, "1", "minutes", "others"));
+        options1Items.add(new FocusTimeBean(0, "0 hour", "hours", "others"));
+        options1Items.add(new FocusTimeBean(1, "1 hour", "minutes", "others"));
 
         ArrayList<String> options2Items_01 = new ArrayList<>();
-        options2Items_01.add("1");
-        options2Items_01.add("15");
-        options2Items_01.add("30");
-        options2Items_01.add("45");
+        options2Items_01.add("1 min");
+        options2Items_01.add("15 min");
+        options2Items_01.add("30 min");
+        options2Items_01.add("45 min");
         ArrayList<String> options2Items_02 = new ArrayList<>();
-        options2Items_02.add("0");
-        options2Items_02.add("15");
-        options2Items_02.add("30");
+        options2Items_02.add("0 min");
+        options2Items_02.add("15 min");
+        options2Items_02.add("30 min");
         options2Items.add(options2Items_01);
         options2Items.add(options2Items_02);
     }
@@ -213,8 +213,8 @@ public class MainActivity extends AppCompatActivity {
         pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                int hour = Integer.parseInt(options1Items.get(options1).getPickerViewText());
-                int minute = Integer.parseInt(options2Items.get(options1).get(options2));
+                int hour = Integer.parseInt(options1Items.get(options1).getPickerViewText().split(" ")[0]);
+                int minute = Integer.parseInt(options2Items.get(options1).get(options2).split(" ")[0]);
                 Intent intent = new Intent(MainActivity.this, FocusingActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("hour", hour);
