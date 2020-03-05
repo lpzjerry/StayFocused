@@ -270,7 +270,7 @@ public class FocusingActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
                 String shareBody = "StayFocused! APP";
-                String shareSub = "I have focused for " + duration + " in StayFocused!. Come on and check out this amazing app! \n https://home.cs.dartmouth.edu/~pengze/stayfocused/";
+                String shareSub = "I have focused for " + duration + " in StayFocused! Come on and check out this amazing app! \n https://home.cs.dartmouth.edu/~pengze/stayfocused/";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
                 startActivity(Intent.createChooser(myIntent, "Share using"));

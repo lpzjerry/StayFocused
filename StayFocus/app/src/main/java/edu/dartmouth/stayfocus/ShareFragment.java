@@ -36,8 +36,8 @@ public class ShareFragment extends Fragment {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String shareBody = "Stay Focus APP";
-                String shareSub = "https://home.cs.dartmouth.edu/~pengze/stayfocus/";
+                String shareBody = "StayFocused! APP";
+                String shareSub = "I just found this amazing app that can help you study efficiently! Come on and check it out! \n StayFocused!: https://home.cs.dartmouth.edu/~pengze/stayfocused/";
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
                 startActivity(Intent.createChooser(myIntent, "Share using"));
