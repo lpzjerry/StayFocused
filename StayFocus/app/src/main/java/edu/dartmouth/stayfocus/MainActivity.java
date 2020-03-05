@@ -41,6 +41,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        Button buttonShare = (Button) findViewById(R.id.share_link);
+        ImageButton buttonShare = (ImageButton) findViewById(R.id.share_link);
         Button buttonLogout = (Button) findViewById(R.id.logout);
         buttonShare.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
