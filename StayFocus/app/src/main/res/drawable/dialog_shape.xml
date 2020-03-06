@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--https://stackoverflow.com/questions/28937106/how-to-make-custom-dialog-with-rounded-corners-in-android-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <gradient
         android:angle="90"
@@ -11,6 +12,4 @@
         android:top="20dp"
         android:right="20dp"
         android:bottom="20dp" />
-
-
 </shape>

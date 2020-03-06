@@ -9,7 +9,7 @@
     android:paddingRight="16dp"
     android:paddingTop="32dp"
     android:orientation="vertical"
-    android:background="@drawable/bg_login_new"
+    android:background="@drawable/bg_login"
     tools:context=".LogInActivity">
 
     <EditText

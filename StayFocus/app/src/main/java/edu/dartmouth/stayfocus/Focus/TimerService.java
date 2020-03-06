@@ -1,5 +1,8 @@
 package edu.dartmouth.stayfocus.Focus;
 
+//derived from binddemo on the course website
+//https://www.cs.dartmouth.edu/~xingdong/Teaching/CS65/lecture19/lecture19.html
+
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -58,10 +61,6 @@ public class TimerService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(DEBUG_TAG, "onBind called");
-
-
-
-
         return myBinder;
     }
 
