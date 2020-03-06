@@ -2,6 +2,8 @@
 An android app to improve working efficiency.
 [Project Page](https://home.cs.dartmouth.edu/~pengze/stayfocused/)
 
+Note: The latest version of Android Studio (3.6.1) is needed to build our project. Sorry for the potential inconvenience.
+
 ### Dependencies
 ```
 dependencies {
