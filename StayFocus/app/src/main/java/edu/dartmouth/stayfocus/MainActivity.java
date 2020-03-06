@@ -192,8 +192,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getOptionData() {
-        options1Items.add(new FocusTimeBean(0, "0 hour", "hours", "others"));
-        options1Items.add(new FocusTimeBean(1, "1 hour", "minutes", "others"));
+        options1Items.add(new FocusTimeBean(0, "0 hour"));
+        options1Items.add(new FocusTimeBean(1, "1 hour"));
 
         ArrayList<String> options2Items_01 = new ArrayList<>();
         options2Items_01.add("1 min");

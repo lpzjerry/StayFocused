@@ -5,14 +5,10 @@ import com.contrarywind.interfaces.IPickerViewData;
 public class FocusTimeBean implements IPickerViewData {
     private long id;
     private String name;
-    private String description;
-    private String others;
 
-    public FocusTimeBean(long id, String name, String description, String others) {
+    public FocusTimeBean(long id, String name) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.others = others;
     }
 
     public long getId() {
@@ -29,22 +25,6 @@ public class FocusTimeBean implements IPickerViewData {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getOthers() {
-        return others;
-    }
-
-    public void setOthers(String others) {
-        this.others = others;
     }
 
     @Override
