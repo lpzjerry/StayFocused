@@ -82,7 +82,6 @@ public class RecordFragment extends Fragment {
                     adapter.add(new Entry(startTime, endTime, duration, success));
                 }
 
-
                 @Override
                 public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
@@ -171,9 +170,7 @@ public class RecordFragment extends Fragment {
 
                 }else{
                     resImg.setImageResource(R.drawable.successful);
-
                 }
-
             }
 
             return v;
