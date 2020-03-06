@@ -7,6 +7,11 @@
 
 [Demo Video](https://drive.google.com/file/d/1WkFBHc92XS_Vd6gbQXKYVTEBVcokjeWZ/view?usp=sharing)
 
+[Presentation Slides](https://docs.google.com/presentation/d/1ZcgcSsIzi2mrQFcibeShEOm1aVltDKFl9QIc48U9g8U/edit?usp=sharing)
+
+- **Google Login is supported only if the APP is installed from the above APK.**
+	- If you are building from the source code, please register an account.
+
 ### Who Did What
 - Xiangxin Kong:
 	- UI Desgin
