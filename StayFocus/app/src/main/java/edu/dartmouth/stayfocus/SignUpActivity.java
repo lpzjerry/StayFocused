@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         //kxx: add for UI
+        //https://stackoverflow.com/questions/33705720/how-to-hide-status-bar/33705740
         View decorView = getWindow().getDecorView();
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;

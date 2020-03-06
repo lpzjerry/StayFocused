@@ -157,19 +157,5 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        //AlertDialog alertDialog = new AlertDialog.Builder(getContext()).setTitle(title)
-
-
-
-
-    }
-    public Activity getActivity(Fragment fragment) {
-        if (fragment == null) {
-            return null;
-        }
-        while (fragment.getParentFragment() != null) {
-            fragment = fragment.getParentFragment();
-        }
-        return fragment.getActivity();
     }
 }

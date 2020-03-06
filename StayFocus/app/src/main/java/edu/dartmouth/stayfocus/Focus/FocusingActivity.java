@@ -220,22 +220,6 @@ public class FocusingActivity extends AppCompatActivity {
         sendBroadcast(intent);
     }
 
-//    @Override
-//    public void finish() {
-//        super.finish();
-//        Log.d(DEBUG_TAG, "finish");
-//
-//        Intent intent = new Intent();
-//        intent.setAction(NotifyService.ACTION);
-//        intent.putExtra(NotifyService.STOP_SERVICE_BROADCAST_KEY,
-//                NotifyService.RQS_STOP_SERVICE);
-//        //sendBroadcast(intent);
-//        appContext.stopService(intent);
-//
-//        // TODO return Entry
-//        Entry entry = new Entry();
-//        new FirebaseHelper().addEntry(entry);
-//    }
 
     @Override
     public void onDestroy(){
@@ -277,32 +261,11 @@ public class FocusingActivity extends AppCompatActivity {
                 myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
                 myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
                 startActivity(Intent.createChooser(myIntent, "Share using"));
-                //FocusingActivity.this.finish();
             }
         });
         //alertDialog.setMessage("You stayed focused for " + duration);
         resultMessage.setText("You stayed focused for " + duration);
 
-        /*alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cool",new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                FocusingActivity.this.finish();
-            }
-        });
-        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Share",new DialogInterface.OnClickListener(){
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Stay Focus APP";
-                String shareSub = "https://home.cs.dartmouth.edu/~pengze/stayfocus/";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSub);
-                startActivity(Intent.createChooser(myIntent, "Share using"));
-                FocusingActivity.this.finish();
-            }
-        });*/
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override

@@ -5,7 +5,7 @@
     android:id="@+id/countdowntimer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_to_2">
+    android:background="@drawable/bg_general">
 
     <!--<com.dhims.timerview.TimerTextView
         android:id="@+id/timerText"

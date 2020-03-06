@@ -6,7 +6,7 @@
     android:padding="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical"
-    android:background="@drawable/bg_to_2">
+    android:background="@drawable/bg_general">
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"

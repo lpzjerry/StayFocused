@@ -64,19 +64,6 @@ public class TodoActivity extends AppCompatActivity {
         }); */
     }
 
-  /*  public void showDatePickerDialog(View v){
-        DialogFragment dialogFragmentDate = new DatePickerFragment();
-        dialogFragmentDate.show(getSupportFragmentManager(), "datePicker");
-    }
-
-    public void showTimePickerDialog(View v){
-        DialogFragment dialogFragmentTime= new TimePickerFragment();
-        dialogFragmentTime.show(getSupportFragmentManager(), "timePicker");
-    }
-
-   /* public void onSaveButtonClicked(View v){
-        finish();//temporary
-    }*/
 
     public void onCancelButtonClicked(View v){
         finish();
