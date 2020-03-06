@@ -1,6 +1,8 @@
 # StayFocused
 <p>An android app to improve working efficiency.</p>
 
+[Download APK](https://github.com/lpzjerry/StayFocused/raw/master/StayFocused.apk)
+
 [Project Page](https://home.cs.dartmouth.edu/~pengze/stayfocused/)
 
 [Demo Video](https://drive.google.com/file/d/1WkFBHc92XS_Vd6gbQXKYVTEBVcokjeWZ/view?usp=sharing)
