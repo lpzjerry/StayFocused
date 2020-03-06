@@ -157,13 +157,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Always call the superclass so it can save the view hierarchy state
@@ -192,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getOptionData() {
-        options1Items.add(new FocusTimeBean(0, "0 hour", "hours", "others"));
-        options1Items.add(new FocusTimeBean(1, "1 hour", "minutes", "others"));
+        options1Items.add(new FocusTimeBean(0, "0 hour"));
+        options1Items.add(new FocusTimeBean(1, "1 hour"));
 
         ArrayList<String> options2Items_01 = new ArrayList<>();
         options2Items_01.add("1 min");

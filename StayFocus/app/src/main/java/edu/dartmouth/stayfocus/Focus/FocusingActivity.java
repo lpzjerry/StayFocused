@@ -1,11 +1,13 @@
 package edu.dartmouth.stayfocus.Focus;
 
+import edu.dartmouth.stayfocus.Entry;
+import edu.dartmouth.stayfocus.FirebaseHelper;
+import edu.dartmouth.stayfocus.R;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActivityManager;
 import android.app.Application;
-import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,7 +20,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,14 +29,6 @@ import android.widget.TextView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-
-import edu.dartmouth.stayfocus.Entry;
-import edu.dartmouth.stayfocus.FirebaseHelper;
-import edu.dartmouth.stayfocus.MainActivity;
-import edu.dartmouth.stayfocus.R;
-
-import static java.lang.Math.min;
 import static java.lang.String.*;
 
 
@@ -46,7 +39,7 @@ public class FocusingActivity extends AppCompatActivity {
     private int init_hour, init_minute;
     private long futureTimestamp;
     private long remainTimestamp;
-    private String startTime, endTime, duration, success;
+    private String startTime, duration;
     private boolean finished = false;
     public HomeWatcher mHomeWatcher;
 
@@ -104,8 +97,6 @@ public class FocusingActivity extends AppCompatActivity {
         futureTimestamp = System.currentTimeMillis() + (hour * 60 * 60 * 1000)
                + (minute * 60 * 1000) + (second * 1000);
         Log.d(DEBUG_TAG, "futureTimeStamp: " + futureTimestamp);
-        // TimerTextView timerText = (TimerTextView) this.findViewById(R.id.timerText);
-        // timerText.setEndTime(futureTimestamp);
 
         timerTextView = (TextView) findViewById(R.id.tv_countdown_timer);
 
@@ -154,12 +145,9 @@ public class FocusingActivity extends AppCompatActivity {
             if(msg.what == TimerService.MSG_REMAIN_TIME) {
                 Bundle bundle = msg.getData();
                 remainTimestamp = bundle.getLong(TimerService.NAME_BUNDLE_REMAIN_TIME);
-                // Log.d(DEBUG_TAG, "remainTimestamp: " + remainTimestamp);
                 int seconds = (int)Math.ceil( (remainTimestamp / 1000) % 60);
                 int minutes = (int)Math.ceil( ((remainTimestamp / (1000*60)) % 60));
                 int hours   = (int)Math.ceil( ((remainTimestamp / (1000*60*60)) % 24));
-                // Log.d(DEBUG_TAG, hours + "h " + minutes + "min " + seconds +"s");
-                // Toast.makeText(getApplicationContext(),hours + "h " + minutes + "min " + seconds +"s" , Toast.LENGTH_SHORT).show();
                 timerTextView.setText(format("%02d:%02d:%02d", hours, minutes, seconds));
                 if (hours <= 0 && minutes <= 0 && seconds <= 0) {
                     finished = true;
@@ -170,27 +158,9 @@ public class FocusingActivity extends AppCompatActivity {
                     Intent notifyService = new Intent(FocusingActivity.this, NotifyService.class);
                     stopService(notifyService);
                     showResult();
-                    //FocusingActivity.this.finish();
                 }
             }
         }
-    }
-
-    private boolean isAppOnForeground(Context context) {
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        assert activityManager != null;
-        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
-        if (appProcesses == null) {
-            return false;
-        }
-        final String packageName = context.getPackageName();
-        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-            if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
-                    && appProcess.processName.equals(packageName)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -220,17 +190,12 @@ public class FocusingActivity extends AppCompatActivity {
         sendBroadcast(intent);
     }
 
-
     @Override
     public void onDestroy(){
         super.onDestroy();
         Log.d(DEBUG_TAG, "finish");
 
         Intent intent = new Intent(this, NotifyService.class);
-        //intent.setAction(NotifyService.ACTION);
-        //intent.putExtra(NotifyService.STOP_SERVICE_BROADCAST_KEY,
-                //NotifyService.RQS_STOP_SERVICE);
-        //sendBroadcast(intent);
         appContext.stopService(intent);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -263,7 +228,6 @@ public class FocusingActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(myIntent, "Share using"));
             }
         });
-        //alertDialog.setMessage("You stayed focused for " + duration);
         resultMessage.setText("You stayed focused for " + duration);
 
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
