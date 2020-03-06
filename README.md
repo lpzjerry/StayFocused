@@ -1,10 +1,29 @@
 # StayFocused
-An android app to improve working efficiency.
+<p>An android app to improve working efficiency.</p>
+
 [Project Page](https://home.cs.dartmouth.edu/~pengze/stayfocused/)
 
-Note: The latest version of Android Studio (3.6.1) is needed to build our project. Sorry for the potential inconvenience.
+[Demo Video](https://drive.google.com/file/d/1WkFBHc92XS_Vd6gbQXKYVTEBVcokjeWZ/view?usp=sharing)
+
+### Who Did What
+- Xiangxin Kong:
+	- UI Desgin
+	- Timer Service
+- Pengze Liu:
+	- Everything related to focusing page (wheel picker, block quit buttons, notification)
+	- Splash page
+- Peixuan Wang
+	- Login(Email, Google login) and Signup
+	- Cloud backend using firebase
+	- Record page
+	- Sharing (APP, Record)
+- Yinyin Zheng
+	- Everything related to to-do page
+	- Room database
 
 ### Dependencies
+- Android Studio 3.6.1
+- Android 8.0 or above
 ```
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -38,6 +57,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 ```
+
 ### References
 - OFFICIAL DOCUMENTS:
 	- https://developers.google.com/identity/sign-in/android/start-integrating
